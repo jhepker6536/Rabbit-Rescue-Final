@@ -55,7 +55,7 @@ def level_two(color):
     
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
     key = Key(key_x,key_y,player2.change_x)
-    
+    spikes = pygame.image.load('spikes.png')
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
     platform_list.add(platform_test, platform2, platform1,platform3,platform6)
@@ -131,7 +131,7 @@ def level_two(color):
             if key_collected == False:
                 caged_bunny.get_the_key()
             
-           
+        screen.blit(spikes,[30,30])  
         
         if key_collected == False and player2.change_x > 0:
             Key.key_move_x += player2.change_x + 2
