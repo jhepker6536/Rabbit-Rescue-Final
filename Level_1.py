@@ -54,7 +54,7 @@ def level_one(color):
     platform3 = Platform(1600,430,1)
     platform6 = Platform(2400,250,1)
     
-    player = Player(25,400,platform_list,True,player_color, hight)
+    player = Player(25,400,platform_list,True,player_color, hight,spike_list=())
     snake = Snake(400,370)
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
     key = Key(key_x,key_y,player.change_x)
@@ -144,24 +144,22 @@ def level_one(color):
         if player.change_x > 0:
             Platform.platform_move_x += player.change_x + 2
             Caged_Bunny.Cage_move_x += player.change_x + 2
-            Snake_limits.limit_move += player.change_x + 2
-            Constants.snake_limit_one += player.change_x + 2
-            Constants.snake_limit_two += player.change_x + 2
+            
+            
             snake.move_x += player.change_x + 2
              
         elif player.change_x < 0:
             Platform.platform_move_x += player.change_x - 2
             Caged_Bunny.Cage_move_x += player.change_x - 2
-            Snake_limits.limit_move += player.change_x - 2
-            Constants.snake_limit_one += player.change_x - 2
-            Constants.snake_limit_two += player.change_x - 2
-            snake.move_x += player.change_x - 2
+            
         background_x += background_x_change 
         
         if player.rect.x == width:
             Platform.platform_move_x += 3
         active_sprite_list.update()
-        active_sprite_list.draw(screen)    
+        active_sprite_list.draw(screen)  
+        if Constants.game_over == True:
+            break  
         if player.rect.x >= 1300 and key_collected == True:
             Constants.level = 2
             break

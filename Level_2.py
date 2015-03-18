@@ -1,6 +1,6 @@
 import pygame 
 import random 
-
+from Player import Spikes
 from Player import Player
 from Player import Key
 from Player import Caged_Bunny
@@ -26,6 +26,7 @@ def level_two(color):
     platform_list = pygame.sprite.Group()
     active_sprite_list = pygame.sprite.Group()
     key_list = pygame.sprite.Group()
+    spike_list = pygame.sprite.Group()
     
     if color == "Blue":
         player_color = Player.blue_bunny
@@ -51,16 +52,17 @@ def level_two(color):
     platform3 = Platform(1800,230,1)
     platform6 = Platform(2400,400,1)
     
-    player2 = Player(25,400,platform_list,True,player_color, hight)
-    
+    player2 = Player(25,400,platform_list,True,player_color, hight,spike_list)
+    spike = Spikes(750,580)
+    spike2 = Spikes(740,560)
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
     key = Key(key_x,key_y,player2.change_x)
-    spikes = pygame.image.load('spikes.png')
+    
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
     platform_list.add(platform_test, platform2, platform1,platform3,platform6)
-    active_sprite_list.add(caged_bunny,player2,platform_test,platform2,platform1,platform3,platform6,key)
-    
+    active_sprite_list.add(caged_bunny,player2,platform_test,platform2,platform1,platform3,platform6,key,spike)
+    spike_list.add(spike)
     background_x_change = 0 
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
     text11 = font2.render("Exit",True,Constants.RED)
@@ -69,20 +71,27 @@ def level_two(color):
     done = False
     
     background_image = pygame.image.load("Forest Background2.png")
+    game_over_image = pygame.image.load("game over.png")
     background_x = -100
     
     while not done:
     
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
+                
                 if event.key == pygame.K_LEFT:
                     player2.go_left()
                     background_x_change += 2
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if mouse_x >= 600:
+                        done = True
                 elif event.key == pygame.K_RIGHT:
                     player2.go_right()
                     background_x_change -= 2 
                 elif event.key == pygame.K_SPACE:
                     player2.jump()
+                
+                        
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT and player2.change_x < 0:
                     player2.stop()
@@ -131,7 +140,7 @@ def level_two(color):
             if key_collected == False:
                 caged_bunny.get_the_key()
             
-        screen.blit(spikes,[30,30])  
+        
         
         if key_collected == False and player2.change_x > 0:
             Key.key_move_x += player2.change_x + 2
@@ -141,13 +150,14 @@ def level_two(color):
         if player2.change_x > 0:
             Platform.platform_move_x += player2.change_x + 2
             Caged_Bunny.Cage_move_x += player2.change_x + 2
-            
-            
+            spike.spike_move_x += player2.change_x + 2
+            spike2.spike_move_x += player2.change_x + 2
              
         elif player2.change_x < 0:
             Platform.platform_move_x += player2.change_x - 2
             Caged_Bunny.Cage_move_x += player2.change_x - 2
-            
+            spike.spike_move_x += player2.change_x - 2
+            spike2.spike_move_x += player2.change_x - 2
             
         Snake.snake_screen_adjust = player2.change_x 
         background_x += background_x_change 
@@ -155,12 +165,14 @@ def level_two(color):
         if player2.rect.x == width:
             Platform.platform_move_x += 3
         active_sprite_list.update()
-        active_sprite_list.draw(screen)    
+        active_sprite_list.draw(screen)  
+        if Constants.game_over == True:
+            screen.blit(game_over_image,[0,0])   
         if player2.rect.x >= 1300 and key_collected == True:
             Constants.level = 3 
             break   
         pygame.display.flip()
         clock.tick(60)
-    pygame.quit()
+
 if __name__ == "__main__":
     level_two("Purple")

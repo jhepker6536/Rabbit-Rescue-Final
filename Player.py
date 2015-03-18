@@ -5,6 +5,29 @@ import random
 import Player
 #Player Colors
 
+class Spikes(pygame.sprite.Sprite):
+    spike = []
+    spike_move_x = 0
+    spike_move_y = 0 
+    def __init__(self, x,y):
+        self.x = x
+        self.y = y
+        
+        
+        super().__init__()
+ 
+        sprite_sheet = SpriteSheet("Caged Bunnies.png")
+        image = sprite_sheet.get_image(26, 562, 468, 108)
+        image.set_colorkey(Constants.GREENS)
+        self.spike.append(image)
+        
+        
+        self.image = self.spike[0]
+        self.rect = self.image.get_rect()
+    def update(self):
+        self.rect.x = self.x - self.spike_move_x
+        self.rect.y = self.y + self.spike_move_y
+    
 class Snake_limits(pygame.sprite.Sprite):
     limit_move = 0 
     snake_limit_list = []
@@ -41,8 +64,6 @@ class Snake(pygame.sprite.Sprite):
         self.x = x
         
         self.y = y
-        self.limit = Constants.snake_limit_one
-        self.limit2 = Constants.snake_limit_two
         super().__init__()
         sprite_sheet = SpriteSheet("Snakes.png")
         image = sprite_sheet.get_image(4, 1, 115, 82)
@@ -183,12 +204,13 @@ class Player(pygame.sprite.Sprite):
     level = None
 
     
-    def __init__(self,x,y,list_platform,grav,bunny_color,hight): 
+    def __init__(self,x,y,list_platform,grav,bunny_color,hight,spike_list): 
         self.height = hight
         self.grav = grav
         self.x = x
         self.y = y
         self.list = list_platform
+        self.spike_list = spike_list
 
         super().__init__()
         sprite_sheet = SpriteSheet("Rabbit_Sprite.png")
@@ -259,6 +281,17 @@ class Player(pygame.sprite.Sprite):
  
             # Stop our vertical movement
             self.change_y = 0
+        block_hit_list = pygame.sprite.spritecollide(self, self.spike_list, False)
+        for block in block_hit_list:
+            
+            self.change_x = 0
+           
+ 
+            # Stop our vertical movement
+            self.change_y = 0
+            
+            Constants.game_over = True
+        
 
         if self.rect.x <= 5:
             self.rect.x = 5    

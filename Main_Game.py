@@ -7,6 +7,7 @@ from Level_1 import level_one
 from Level_2 import level_two
 import Constants
 import Level_2
+from Constants import game_over, BLACK
  
 
 # Define some colors 
@@ -69,7 +70,9 @@ def main():
     text6 = font.render("<-BACK", True, RED)
     text7 = font2.render("DIFFICULTY", True, RED)
     text11 = font2.render("Exit", True, RED)
-        
+    COLOR4 = RED
+    COLOR5 = RED
+    COLOR6 = RED   
    
     # cursor picture
     
@@ -106,7 +109,7 @@ def main():
     # Parent while loop
     while not really_done:
         
-        print(Constants.level)
+        print(Constants.game_over)
         # child loop containing loading screen!
         while screen_view == 0 and done == False:
             for event in pygame.event.get(): 
@@ -136,7 +139,7 @@ def main():
             clock.tick(frame_rate)            
             
         # child while loop, containing menu!
-        while screen_view == 1 and done == False:
+        while screen_view == 1 and done == False :
             for event in pygame.event.get(): 
                 if event.type == pygame.QUIT:
                     done = True 
@@ -144,26 +147,30 @@ def main():
                 # Do they hit the bottons and change mouse anamation
                 elif event.type == pygame.MOUSEBUTTONDOWN:                   
                     if mouse_x >= 399 and mouse_x <= 917 and mouse_y >= 325 and mouse_y <= 416:
-                        print("game") 
-                        while (Constants.level == 1):
+                        print("game")
+                         
+                        while (Constants.level == 1) and Constants.game_over == False:
                             level_one(color)
-                        while (Constants.level == 2):
+                           
+                            print(Constants.game_over)
+                            
+                        while (Constants.level == 2) and Constants.game_over == False:
                             Platform.platform_move_x = 0 
                             Caged_Bunny.Cage_move_x = 0 
                             Key.key_move_x = 0 
+                            print(Constants.game_over)
                             level_two(color)  
-                        while (Constants.level == 3):
+                           
+                            
+                        while (Constants.level == 3) and Constants.game_over == False:
                             Platform.platform_move_x = 0 
                             Caged_Bunny.Cage_move_x = 0 
                             Key.key_move_x = 0 
+                            print(Constants.game_over)
                             level_two(color)
-                        while(Constants.level == 4):
-                            pygame.quit()
-                    elif mouse_x >= 398 and mouse_x <= 649 and mouse_y >= 574 and mouse_y <= 666:
-                        print("got it load")
-                        color2 = WHITE 
-                        screen_view = 3
-                        (399, 575, 250, 91)
+                            
+
+                        
                     elif mouse_x >= 398 and mouse_x <= 889 and mouse_y >= 450 and mouse_y <= 541:
                         print("and again setting")
                         color3 = GREEN
@@ -181,7 +188,7 @@ def main():
             total_seconds = frame_count // frame_rate
             minutes = total_seconds // 60
             seconds = total_seconds % 60
-            print(seconds)
+            
             frame_count += 1
             # Creat Buttons
             screen.blit(title, [250, 100])            
@@ -206,51 +213,7 @@ def main():
             # Limit to 20 frames per second
             clock.tick(frame_rate)
 
-        # child while loop, containing load screen!
-        while screen_view == 3 and done == False:
-            for event in pygame.event.get(): 
-                if event.type == pygame.QUIT:
-                    done = True 
-                    really_done = True
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if mouse_x >= 99 and mouse_x <= 249 and mouse_y >= 349 and mouse_y <= 398:
-                        screen_view = 1
-                    elif mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 649 and mouse_y <= 778:
-                        done = True
-                        really_done = True                 
-
-                # Creat Background
-                screen.fill(BLACK)
-                total_seconds = frame_count // frame_rate
-                minutes = total_seconds // 60
-                seconds = total_seconds % 60
-                print (seconds) 
-                frame_count += 1
-                # Creat Buttons
-                screen.blit(text5, [200, 300])
-                
-                screen.blit(text6, [100, 350])    
-                
-                # quit
-                screen.blit(text11, [1200, 650])
-                 
-                
-                # Change Mouse
-                
-                pos = pygame.mouse.get_pos()
-                mouse_x = pos[0]
-                mouse_y = pos[1] 
-                
-                pygame.display.update()
-                pygame.display.flip()
-            
-                # Limit to 20 frames per second
-                clock.tick(frame_rate) 
-                
-                
-        COLOR4 = RED
-        COLOR5 = RED
-        COLOR6 = RED                
+        
         # child while loop, containing setttings screen!
         while screen_view == 4 and done == False:
                 for event in pygame.event.get(): 
@@ -323,7 +286,7 @@ def main():
                     minutes = total_seconds // 60
                     seconds = total_seconds % 60
                     
-                    print (color)
+                    
                     frame_count += 1                   
                     # Creat Buttons
                     sitting_bunny_list.draw(screen)
@@ -353,11 +316,10 @@ def main():
                     # Limit to 20 frames per second
                     clock.tick(frame_rate)  
     
-
-    
+                    
     clock.tick(frame_rate)
     pygame.quit()    
             
-                
+                    
 if __name__ == "__main__":
     main()
