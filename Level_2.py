@@ -78,14 +78,20 @@ def level_two(color):
     
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
+                
                 if event.key == pygame.K_LEFT:
                     player2.go_left()
                     background_x_change += 2
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if mouse_x >= 600:
+                        done = True
                 elif event.key == pygame.K_RIGHT:
                     player2.go_right()
                     background_x_change -= 2 
                 elif event.key == pygame.K_SPACE:
                     player2.jump()
+                
+                        
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT and player2.change_x < 0:
                     player2.stop()

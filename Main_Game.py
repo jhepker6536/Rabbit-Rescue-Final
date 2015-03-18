@@ -109,7 +109,7 @@ def main():
     # Parent while loop
     while not really_done:
         
-        
+        print(Constants.game_over)
         # child loop containing loading screen!
         while screen_view == 0 and done == False:
             for event in pygame.event.get(): 
