@@ -123,7 +123,7 @@ class Caged_Bunny(pygame.sprite.Sprite):
         image_num = 0
         super().__init__()
         sprite_sheet = SpriteSheet("Caged Bunnies.png")
-        image = sprite_sheet.get_image(359, 311, 171, 149)
+        image = sprite_sheet.get_image(11, 7, 175, 150)
         self.caged_bunny_list.append(image)
         image.set_colorkey(Constants.WHITE)
         image = sprite_sheet.get_image(531, 395, 220, 343)
