@@ -1,7 +1,7 @@
 import pygame 
 import random 
 from Player import Spikes
-from Player import Player
+from Player import Player_climber
 from Player import Key
 from Player import Caged_Bunny
 from Player import Snake
@@ -29,21 +29,21 @@ def level_three(color):
     spike_list = pygame.sprite.Group()
     
     if color == "Blue":
-        player_color = Player.blue_bunny
+        player_color = Player_climber.blue_bunny
     elif color == "Brown":
-        player_color = Player.brown_bunny
+        player_color = Player_climber.brown_bunny
     elif color == "Purple":
-        player_color = Player.purple_bunny
+        player_color = Player_climber.purple_bunny
     elif color == "Green":
-        player_color = Player.green_bunny 
+        player_color = Player_climber.green_bunny 
     elif color == "Yellow":
-        player_color = Player.yellow_bunny   
+        player_color = Player_climber.yellow_bunny   
     elif color == "White":
-        player_color = Player.white_bunny
+        player_color = Player_climber.white_bunny
     elif color == "Pink":
-        player_color = Player.pink_bunny
+        player_color = Player_climber.pink_bunny
     else:
-        player_color = Player.black_bunny
+        player_color = Player_climber.black_bunny
         
         
     platform_test = Platform(floor_x,674,0)
@@ -52,7 +52,7 @@ def level_three(color):
     platform3 = Platform(300,630,1)
     platform6 = Platform(500,800,1)
     
-    player2 = Player(25,470,platform_list,True,player_color, hight,spike_list)
+    player2 = Player_climber(25,470,platform_list,True,player_color, hight,spike_list)
     spike = Spikes(750,580)
     spike2 = Spikes(740,560)
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
@@ -151,7 +151,7 @@ def level_three(color):
             pass
              
         elif player2.change_y < 0:
-            background_y_change += 1
+            background_y_change += Player_climber.change_y
             Platform.platform_move_y -= player2.change_y - 2
             Caged_Bunny.Cage_move_x += player2.change_x - 2
             spike.spike_move_x += player2.change_x - 2
