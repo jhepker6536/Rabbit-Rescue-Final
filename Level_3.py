@@ -46,21 +46,28 @@ def level_three(color):
         
     platform_test = Platform(floor_x,674,0)
     platform1 = Platform(400,450,2)
-    platform2 = Platform(500,950,2)
-    platform3 = Platform(600,1230,2)
-    platform6 = Platform(400,1500,2)
+    platform2 = Platform(700,250,2)
+    platform3 = Platform(100,0,2)
+    platform6 = Platform(800,-200,2)
+    platform5 = Platform(300,-500,2)
+    platform7 = Platform(900,-700,2)
+    platform8 = Platform(400,-900,2)
+    platform9 = Platform(100,-1200,2)
+    platform10 = Platform(600,-1600,2)
+    platform11 = Platform(100,-1900,2)
+    platform12 = Platform(400,-2300,2)
+    platform13 = Platform(900,-2500,2)
+    
     
     player2 = Player_climber(25,470,platform_list,True,player_color, hight,spike_list)
-    spike = Spikes(750,580)
-    spike2 = Spikes(740,560)
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
     key = Key(key_x,key_y,player2.change_x)
     
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
-    platform_list.add(platform_test, platform2, platform1,platform3,platform6)
-    active_sprite_list.add(caged_bunny,player2,platform_test,platform2,platform1,platform3,platform6,key)
-    spike_list.add(spike)
+    platform_list.add(platform_test, platform2,platform5,platform8,platform9,platform10,platform11,platform12, platform1,platform3,platform6,platform7,platform13)
+    active_sprite_list.add(caged_bunny,player2,platform_test,platform2,platform1,platform7,platform3,platform6,platform6,platform5,platform8,platform9,platform10,platform11,platform12,platform13,key)
+    
     background_y_change = 0 
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
     text11 = font2.render("Exit",True,Constants.RED)
@@ -147,16 +154,19 @@ def level_three(color):
             
         if player2.change_y > 0:
             pass
-             
-        elif player2.change_y < 0:
-            background_y_change = Platform.platform_move_y
-            Platform.platform_move_y -= player2.change_y - 2
-            Caged_Bunny.Cage_move_x += player2.change_x - 2
-            spike.spike_move_x += player2.change_x - 2
-            spike2.spike_move_x += player2.change_x - 2
+            
+            
+        background_y_change = 3
+        Platform.platform_move_y += 2
+        Caged_Bunny.Cage_move_x += player2.change_x - 2
+    
+
+            
+         
+            
             
         print(player2.change_y, background_y,background_y_change) 
-        background_y += background_y_change 
+        background_y = background_y + background_y_change 
         
         if player2.rect.x == width:
             Platform.platform_move_x += 3

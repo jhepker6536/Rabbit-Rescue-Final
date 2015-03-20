@@ -564,7 +564,7 @@ class Player_climber(pygame.sprite.Sprite):
             
             if self.change_y >= 1:
                 self.rect.bottom = block.rect.top
-            elif self.change_y < 1:
+            elif self.change_y < 0:
                 self.rect.top = block.rect.bottom
             
  
@@ -593,12 +593,12 @@ class Player_climber(pygame.sprite.Sprite):
         if self.change_y == 0:
             self.change_y += 1
         else:
-            self.change_y += .45
+            self.change_y += .25
             
     
 
     def go_right(self):
-        self.change_x = 3
+        self.change_x = 5
         self.direction = "R"
     def stop(self):
         self.change_x = 0
@@ -609,15 +609,11 @@ class Player_climber(pygame.sprite.Sprite):
  
      
     def go_left(self):
-        self.change_x -= 3
+        self.change_x -= 5
         self.direction = "L"
     def jump(self):
-        if self.change_y <= 0:
-            if self.rect.y >= 70:
-                self.change_y = -13
-            else:
-                self.change_y = 5
-        else:
-            None
+    
+        self.change_y = -8
+        
         
 
