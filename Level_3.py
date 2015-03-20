@@ -46,9 +46,9 @@ def level_three(color):
         
     platform_test = Platform(floor_x,674,0)
     platform1 = Platform(400,450,1)
-    platform2 = Platform(600,450,1)
-    platform3 = Platform(300,630,1)
-    platform6 = Platform(500,800,1)
+    platform2 = Platform(500,950,1)
+    platform3 = Platform(600,1230,1)
+    platform6 = Platform(400,1500,1)
     
     player2 = Player_climber(25,470,platform_list,True,player_color, hight,spike_list)
     spike = Spikes(750,580)

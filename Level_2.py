@@ -53,16 +53,18 @@ def level_two(color):
     platform6 = Platform(2400,400,1)
     
     player2 = Player(25,400,platform_list,True,player_color, hight,spike_list)
-    spike = Spikes(750,580)
-    spike2 = Spikes(740,560)
+    spike = Spikes(755,580)
+    spike2 = Spikes(736,580)
+    spike3 = Spikes(1536,580)
+    spike4 = Spikes(1555,580)
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
     key = Key(key_x,key_y,player2.change_x)
     
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
     platform_list.add(platform_test, platform2, platform1,platform3,platform6)
-    active_sprite_list.add(caged_bunny,player2,platform_test,platform2,platform1,platform3,platform6,key,spike)
-    spike_list.add(spike)
+    active_sprite_list.add(spike3,spike4,spike2,caged_bunny,player2,platform_test,platform2,platform1,platform3,platform6,key,spike)
+    spike_list.add(spike,spike3,spike4,spike2)
     background_x_change = 0 
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
     text11 = font2.render("Exit",True,Constants.RED)
@@ -88,7 +90,9 @@ def level_two(color):
                     Platform.platform_move_x = 0 
                     Caged_Bunny.Cage_move_x = 0 
                     spike.spike_move_x = 0 
-                    spike2.spike_move_x = 0 
+                    spike2.spike_move_x = 0
+                    spike3.spike_move_x = 0
+                    spike4.spike_move_x = 0 
                     Key.key_move_x = 0
                 if mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 649 and mouse_y <= 778:
                     done = True
@@ -161,12 +165,15 @@ def level_two(color):
             Caged_Bunny.Cage_move_x += player2.change_x + 2
             spike.spike_move_x += player2.change_x + 2
             spike2.spike_move_x += player2.change_x + 2
-             
+            spike3.spike_move_x += player2.change_x + 2
+            spike4.spike_move_x += player2.change_x + 2
         elif player2.change_x < 0:
             Platform.platform_move_x += player2.change_x - 2
             Caged_Bunny.Cage_move_x += player2.change_x - 2
             spike.spike_move_x += player2.change_x - 2
             spike2.spike_move_x += player2.change_x - 2
+            spike3.spike_move_x += player2.change_x - 2
+            spike4.spike_move_x += player2.change_x - 2
             
         Snake.snake_screen_adjust = player2.change_x 
         background_x += background_x_change 

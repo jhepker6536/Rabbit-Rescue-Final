@@ -56,7 +56,7 @@ def level_one(color):
     
     #snake limits
     
-    
+    sound_button = pygame.image.load("images.jpg")
     key_list.add(key)
     
     caged_bunny_list.add(caged_bunny)
@@ -69,7 +69,7 @@ def level_one(color):
     
     clock = pygame.time.Clock()
     done = False
-    
+    song = pygame.mixer.music.load("song1.mp3")
     background_image = pygame.image.load("field_background.png")
     background_x = 0
     
@@ -94,18 +94,19 @@ def level_one(color):
                 elif event.type == pygame.QUIT:
                     done = True 
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 649 and mouse_y <= 778:
+                if mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 710 and mouse_y <= 778:
                     done = True
                     raise SystemExit
+                elif mouse_x >= 12 and mouse_x <= 97 and mouse_y >= 675 and mouse_y <= 775:
 
             
-                                    
+        pygame.mixer.music.play(loops=-1, start=0.11)                            
             
         screen.fill(Constants.WHITE)
         screen.blit(background_image, [background_x, 0])
         
         #quit
-        screen.blit(text11, [1200,650])    
+            
         pos = pygame.mouse.get_pos()
         if background_x > 0:
             background_x = -7
@@ -152,7 +153,9 @@ def level_one(color):
         if player.rect.x == width:
             Platform.platform_move_x += 3
         active_sprite_list.update()
-        active_sprite_list.draw(screen)  
+        active_sprite_list.draw(screen) 
+        screen.blit(sound_button,[12,675])
+        screen.blit(text11, [1200,710])
         if Constants.game_over == True:
             break  
         if player.rect.x >= 1300 and key_collected == True:
@@ -163,5 +166,5 @@ def level_one(color):
         
     pygame.quit()
 if __name__ == "__main__":
-    level_one() 
+    level_one("White") 
     

@@ -14,7 +14,7 @@ class Platform(pygame.sprite.Sprite):
         sprite_sheet = SpriteSheet("plat_spritesheet.png")
         image = sprite_sheet.get_image(0, 673, 4108, 94)
         self.platform.append(image)
-        image = sprite_sheet.get_image(23 ,17, 367, 98)
+        image = sprite_sheet.get_image(20 ,19, 367, 96)
         self.platform.append(image)
         
         

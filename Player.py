@@ -18,7 +18,7 @@ class Spikes(pygame.sprite.Sprite):
  
         sprite_sheet = SpriteSheet("Caged Bunnies.png")
         image = sprite_sheet.get_image(26, 562, 468, 108)
-        image.set_colorkey(Constants.GREENS)
+        image.set_colorkey(Constants.WHITE)
         self.spike.append(image)
         
         
@@ -194,7 +194,7 @@ class Player(pygame.sprite.Sprite):
     black_bunny = ([179,0,102,88],[183,89,111,113],[175,198,137,130])
     green_bunny = ([389,14,99,88],[389,114,115,123],[367,232,139,127])
     blue_bunny = ([595,0,93,88],[612,92,115,123],[535,214,141,122])
-    purple_bunny =([475,350,98,89],[486,470,110,112],[460,580,132,94])
+    purple_bunny =([475,350,98,85],[486,470,110,112],[460,580,132,94])
     white_bunny = ([25,339,101,93],[44,449,111,110],[40,565,135,97])
     yellow_bunny = ([656,305,104,91],[636,419,113,113],[605,545,134,94])
     pink_bunny = ([234,331,101,91],[235,443,114,107],[232,556,138,103])
