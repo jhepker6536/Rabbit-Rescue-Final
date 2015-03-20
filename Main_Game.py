@@ -32,7 +32,8 @@ def main():
     
     
    
-       
+    pygame.mixer.music.load("song1.mp3")
+    pygame.mixer.music.play()   
     # Ad sprites to list 
     
     sitting_bunny_list = pygame.sprite.Group()

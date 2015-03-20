@@ -16,6 +16,8 @@ class Platform(pygame.sprite.Sprite):
         self.platform.append(image)
         image = sprite_sheet.get_image(20 ,19, 367, 96)
         self.platform.append(image)
+        image = sprite_sheet.get_image(5, 162, 400, 100)
+        self.platform.append(image)
         
         
         self.image = self.platform[self.N]

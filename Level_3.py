@@ -45,10 +45,10 @@ def level_three(color):
         
         
     platform_test = Platform(floor_x,674,0)
-    platform1 = Platform(400,450,1)
-    platform2 = Platform(500,950,1)
-    platform3 = Platform(600,1230,1)
-    platform6 = Platform(400,1500,1)
+    platform1 = Platform(400,450,2)
+    platform2 = Platform(500,950,2)
+    platform3 = Platform(600,1230,2)
+    platform6 = Platform(400,1500,2)
     
     player2 = Player_climber(25,470,platform_list,True,player_color, hight,spike_list)
     spike = Spikes(750,580)
@@ -149,7 +149,7 @@ def level_three(color):
             pass
              
         elif player2.change_y < 0:
-            background_y_change += Player_climber.change_y
+            background_y_change = Platform.platform_move_y
             Platform.platform_move_y -= player2.change_y - 2
             Caged_Bunny.Cage_move_x += player2.change_x - 2
             spike.spike_move_x += player2.change_x - 2

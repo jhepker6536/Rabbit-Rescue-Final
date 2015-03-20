@@ -69,10 +69,9 @@ def level_one(color):
     
     clock = pygame.time.Clock()
     done = False
-    song = pygame.mixer.music.load("song1.mp3")
     background_image = pygame.image.load("field_background.png")
     background_x = 0
-    
+    play_counter = 0 
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -98,15 +97,21 @@ def level_one(color):
                     done = True
                     raise SystemExit
                 elif mouse_x >= 12 and mouse_x <= 97 and mouse_y >= 675 and mouse_y <= 775:
-
+                        play_counter += 1 
+                        if play_counter % 2 == 0:
+                            pygame.mixer.music.pause()
+                        else:
+                            pygame.mixer.music.play()
+                        
+                        
             
-        pygame.mixer.music.play(loops=-1, start=0.11)                            
+                                    
             
         screen.fill(Constants.WHITE)
         screen.blit(background_image, [background_x, 0])
         
         #quit
-            
+        print(play_counter)    
         pos = pygame.mouse.get_pos()
         if background_x > 0:
             background_x = -7
