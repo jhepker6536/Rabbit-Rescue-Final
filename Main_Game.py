@@ -1,13 +1,11 @@
 import pygame 
 import random 
-from Player import Player, Caged_Bunny,Key, Not_Moving_Bunny
-from Player import Animated_Player
+from Player import Caged_Bunny,Key, Not_Moving_Bunny,Animated_Player
 from Platforms import Platform
 from Level_1 import level_one
 from Level_2 import level_two
+from Level_3 import level_three
 import Constants
-import Level_2
-from Constants import game_over, BLACK
  
 
 # Define some colors 
@@ -29,15 +27,13 @@ screen = pygame.display.set_mode((width, hight), pygame.FULLSCREEN, 32)
 
 def main():
     """ Main function for the game. """
-    pygame.init()
-    rabbit_color = None   
+    pygame.init()   
     # Random Variables
     
     
    
        
     # Ad sprites to list 
-    empty_platform_list = []
     
     sitting_bunny_list = pygame.sprite.Group()
     Brown_Bunny = Not_Moving_Bunny(0,100,200)
@@ -56,7 +52,6 @@ def main():
     
     # All blitted Text
     font2 = pygame.font.SysFont('Calibri', 50, True, False)
-    font3 = pygame.font.SysFont('Calibri', 60, True, False)
     font = pygame.font.SysFont('Calibri', 70, True, False)
     text1 = pygame.image.load('PlayGameButton.png')
     text2 = pygame.image.load('Settingsbutton.png')
@@ -65,8 +60,6 @@ def main():
     text2.set_colorkey(WHITE)
     text3.set_colorkey(WHITE)
     
-    text4 = font.render("INSERT GAME HERE", True, RED)
-    text5 = font.render("LOAD SCREEN", True, RED)
     text6 = font.render("<-BACK", True, RED)
     text7 = font2.render("DIFFICULTY", True, RED)
     text11 = font2.render("Exit", True, RED)
@@ -100,8 +93,7 @@ def main():
     screen_view = 0
     font = pygame.font.Font(None, 25)
     frame_count = 0
-    frame_rate = 60
-    start_time = 90 
+    frame_rate = 60 
     r_box_x = 330
     r_box_y = 300
     difficulty = "easy"
@@ -167,13 +159,12 @@ def main():
                             Caged_Bunny.Cage_move_x = 0 
                             Key.key_move_x = 0 
                             print(Constants.game_over)
-                            level_two(color)
+                            level_three(color)
                             
 
                         
                     elif mouse_x >= 398 and mouse_x <= 889 and mouse_y >= 450 and mouse_y <= 541:
                         print("and again setting")
-                        color3 = GREEN
                         screen_view = 4
                     elif mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 649 and mouse_y <= 778:
                         done = True
@@ -186,7 +177,6 @@ def main():
             
             
             total_seconds = frame_count // frame_rate
-            minutes = total_seconds // 60
             seconds = total_seconds % 60
             
             frame_count += 1
@@ -224,23 +214,15 @@ def main():
                           
                         if mouse_x >= 99 and mouse_x <= 370 and mouse_y >= 649 and mouse_y <= 730:
                             screen_view = 1
+                        #difficuty                        
                         elif mouse_x >= 800 and mouse_x <= 890 and mouse_y >= 259 and mouse_y <= 308:
-                            COLOR4 = WHITE
-                            COLOR5 = RED
-                            COLOR6 = RED
                             difficulty = "easy"
-                            
-#difficulty 
                         elif mouse_x >= 930 and mouse_x <= 1100 and mouse_y >= 259 and mouse_y <= 308:
-                            COLOR5 = WHITE
-                            COLOR4 = RED
-                            COLOR6 = RED
                             difficulty = "medium"
                         elif mouse_x >= 1150 and mouse_x <= 1250 and mouse_y >= 259 and mouse_y <= 308:
-                            COLOR6 = WHITE
-                            COLOR4 = RED
-                            COLOR5 = RED
                             difficulty = "hard"
+                        
+                        #Are we done
                         elif mouse_x >= 1200 and mouse_x <= 1300 and mouse_y >= 649 and mouse_y <= 798:
                             done = True
                             really_done = True 
@@ -283,10 +265,20 @@ def main():
                     # Background
                     screen.fill(BLACK)
                     total_seconds = frame_count // frame_rate
-                    minutes = total_seconds // 60
                     seconds = total_seconds % 60
                     
-                    
+                    if difficulty == "easy":
+                        COLOR4 = WHITE
+                        COLOR5 = RED
+                        COLOR6 = RED
+                    elif difficulty == "medium":
+                        COLOR5 = WHITE
+                        COLOR4 = RED
+                        COLOR6 = RED
+                    else:
+                        COLOR6 = WHITE
+                        COLOR4 = RED
+                        COLOR5 = RED
                     frame_count += 1                   
                     # Creat Buttons
                     sitting_bunny_list.draw(screen)

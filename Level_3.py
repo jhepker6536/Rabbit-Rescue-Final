@@ -1,13 +1,11 @@
 import pygame 
-import random 
 from Player import Spikes
 from Player import Player_climber
 from Player import Key
 from Player import Caged_Bunny
 from Player import Snake
 import Constants
-from Platforms import Platform
-from Spritesheet import SpriteSheet 
+from Platforms import Platform 
 from os.path import sys
 width = 1366
 hight = 768

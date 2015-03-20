@@ -1,10 +1,5 @@
 import pygame 
-import random 
-from Player import Player
-from Player import Key
-from Player import Caged_Bunny
-from Player import Snake
-from Player import Snake_limits
+from Player import Player, Key, Caged_Bunny, Snake
 import Constants
 from Platforms import Platform
 

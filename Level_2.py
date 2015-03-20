@@ -70,21 +70,35 @@ def level_two(color):
     clock = pygame.time.Clock()
     done = False
     
-    background_image = pygame.image.load("Forest Background2.png")
+    
     game_over_image = pygame.image.load("game over.png")
+    
+    background_image = pygame.image.load("Forest Background2.png")
     background_x = -100
     
     while not done:
     
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if mouse_x >= 598 and mouse_x <= 1100 and mouse_y >= 400 and mouse_y <= 460:
+                    print("hit")
+                    Constants.game_over = False
+                    screen.blit(background_image,[0,0])
+                    player2.reset()
+                    Platform.platform_move_x = 0 
+                    Caged_Bunny.Cage_move_x = 0 
+                    spike.spike_move_x = 0 
+                    spike2.spike_move_x = 0 
+                    Key.key_move_x = 0
+                if mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 649 and mouse_y <= 778:
+                    done = True
+                    raise SystemExit 
+            elif event.type == pygame.KEYDOWN:
                 
                 if event.key == pygame.K_LEFT:
                     player2.go_left()
                     background_x_change += 2
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if mouse_x >= 600:
-                        done = True
+                
                 elif event.key == pygame.K_RIGHT:
                     player2.go_right()
                     background_x_change -= 2 
@@ -101,13 +115,8 @@ def level_two(color):
                     background_x_change = 0 
                 elif event.type == pygame.QUIT:
                     done = True 
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 649 and mouse_y <= 778:
-                    done = True
-                    raise SystemExit
+                                  
 
-            
-                                    
             
         screen.fill(Constants.WHITE)
         screen.blit(background_image, [background_x, 0])

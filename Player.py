@@ -209,6 +209,8 @@ class Player(pygame.sprite.Sprite):
         self.grav = grav
         self.x = x
         self.y = y
+        self.start_x = x
+        self.start_y = y
         self.list = list_platform
         self.spike_list = spike_list
 
@@ -334,6 +336,9 @@ class Player(pygame.sprite.Sprite):
                 self.change_y = 5
         else:
             None
+    def reset(self):
+        self.rect.x = self.start_x
+        self.rect.y = self.start_y
         
 class Animated_Player(pygame.sprite.Sprite):
     
