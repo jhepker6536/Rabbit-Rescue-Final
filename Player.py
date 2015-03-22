@@ -31,13 +31,12 @@ class Spikes(pygame.sprite.Sprite):
 class Snake_limits(pygame.sprite.Sprite):
     limit_move = 0 
     snake_limit_list = []
-    def __init__(self,x,y,speed,platform):
+    def __init__(self,x,y):
         super().__init__()
         
         self.x = x
         self.y = y
-        self.platform = platform
-        self.speed = speed
+        self.y_change = 0 
         
         sprite_sheet = SpriteSheet("Caged Bunnies.png")
         image = sprite_sheet.get_image(589, 70, 2, 12)
@@ -47,8 +46,8 @@ class Snake_limits(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
     def update(self):
-        self.rect.x = self.x - self.limit_move
-        self.rect.y = self.y
+        self.rect.x = self.x 
+        self.rect.y = self.y + self.y_change
                 
     
 class Snake(pygame.sprite.Sprite):
@@ -57,12 +56,12 @@ class Snake(pygame.sprite.Sprite):
     change_x = 0
     change_y = 0
     direction = "R"
-    move_x = 0
-    snake_screen_adjust = 0
+    
       
-    def __init__(self,x,y):
+    def __init__(self,x,y,limit_one,limit_two):
         self.x = x
-        
+        self.limit_one = limit_one
+        self.limit_two = limit_two
         self.y = y
         super().__init__()
         sprite_sheet = SpriteSheet("Snakes.png")
@@ -86,15 +85,12 @@ class Snake(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
-    def update(self): 
         self.change_x = 3
+    def update(self): 
+        
         self.rect.x += self.change_x
         pos = self.rect.x 
-        self.limit 
-        self.limit2
-        
-        
-        
+        self.rect.y += self.change_y
         if self.direction == "R":
             frame = (pos // 20) % len(self.snake_right)
             self.image = self.snake_right[frame]
@@ -102,14 +98,18 @@ class Snake(pygame.sprite.Sprite):
             frame = (pos // 20) % len(self.snake_left)
             self.image = self.snake_left[frame]
             
-        if self.rect.x >= self.limit2: 
+        if self.rect.x >= self.limit_two: 
             self.turn_around()   
-        if self.rect.x >= self.limit:    
+        if self.rect.x <= self.limit_one:    
             self.turn_around()
             
-        print(self.move_x, self.change_x)
+        
     def turn_around(self):
         self.change_x = self.change_x * -1
+        if self.direction == "L":
+            self.direction = "R"
+        else:
+            self.direction = "L"
         
     
 class Caged_Bunny(pygame.sprite.Sprite):

@@ -1,9 +1,9 @@
 import pygame 
-from Player import Spikes
+from Player import Spikes, Snake_limits
 from Player import Player_climber
 from Player import Key
 from Player import Caged_Bunny
-from Player import Snake
+from Player import Snake,Snake_limits
 import Constants
 from Platforms import Platform 
 from os.path import sys
@@ -59,6 +59,7 @@ def level_three(color):
     platform13 = Platform(900,-2500,2)
     
     
+    snake = Snake(100,-75,100,475)
     player2 = Player_climber(25,470,platform_list,True,player_color, hight,spike_list)
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
     key = Key(key_x,key_y,player2.change_x)
@@ -66,7 +67,7 @@ def level_three(color):
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
     platform_list.add(platform_test, platform2,platform5,platform8,platform9,platform10,platform11,platform12, platform1,platform3,platform6,platform7,platform13)
-    active_sprite_list.add(caged_bunny,player2,platform_test,platform2,platform1,platform7,platform3,platform6,platform6,platform5,platform8,platform9,platform10,platform11,platform12,platform13,key)
+    active_sprite_list.add(snake,caged_bunny,player2,platform_test,platform2,platform1,platform7,platform3,platform6,platform6,platform5,platform8,platform9,platform10,platform11,platform12,platform13,key)
     
     background_y_change = 0 
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
@@ -159,13 +160,12 @@ def level_three(color):
         background_y_change = 3
         Platform.platform_move_y += 2
         Caged_Bunny.Cage_move_x += player2.change_x - 2
-    
+        snake.change_y = 2
 
             
          
             
             
-        print(player2.change_y, background_y,background_y_change) 
         background_y = background_y + background_y_change 
         
         if player2.rect.x == width:
