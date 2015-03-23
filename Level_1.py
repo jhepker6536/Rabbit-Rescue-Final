@@ -37,6 +37,7 @@ def level_one(color):
     else:
         player_color = Player.black_bunny
         
+    
         
     caged_bunny_list = pygame.sprite.Group()
     platform_list = pygame.sprite.Group()
@@ -50,7 +51,7 @@ def level_one(color):
     platform6 = Platform(2400,250,1)
     
     player = Player(25,400,platform_list,True,player_color, hight,spike_list=())
-    snake = Snake(400,370)
+   
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
     key = Key(key_x,key_y,player.change_x)
     
@@ -135,7 +136,8 @@ def level_one(color):
             if key_collected == False:
                 caged_bunny.get_the_key()
             
-
+        
+            
         
         if key_collected == False and player.change_x > 0:
             Key.key_move_x += player.change_x + 2
@@ -147,7 +149,6 @@ def level_one(color):
             Caged_Bunny.Cage_move_x += player.change_x + 2
             
             
-            snake.move_x += player.change_x + 2
              
         elif player.change_x < 0:
             Platform.platform_move_x += player.change_x - 2

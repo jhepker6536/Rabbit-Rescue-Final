@@ -25,6 +25,7 @@ def level_three(color):
     active_sprite_list = pygame.sprite.Group()
     key_list = pygame.sprite.Group()
     spike_list = pygame.sprite.Group()
+    snake_list = pygame.sprite.Group()
     
     if color == "Blue":
         player_color = Player_climber.blue_bunny
@@ -48,26 +49,36 @@ def level_three(color):
     platform1 = Platform(400,450,2)
     platform2 = Platform(700,250,2)
     platform3 = Platform(100,0,2)
-    platform6 = Platform(800,-200,2)
-    platform5 = Platform(300,-500,2)
-    platform7 = Platform(900,-700,2)
-    platform8 = Platform(400,-900,2)
+    platform6 = Platform(700,-200,2)
+    platform5 = Platform(200,-420,2)
+    platform7 = Platform(800,-650,2)
+    platform8 = Platform(300,-900,2)
     platform9 = Platform(100,-1200,2)
-    platform10 = Platform(600,-1600,2)
-    platform11 = Platform(100,-1900,2)
-    platform12 = Platform(400,-2300,2)
-    platform13 = Platform(900,-2500,2)
+    platform10 = Platform(600,-1500,2)
+    platform11 = Platform(100,-1800,2)
+    platform12 = Platform(500,-2000,2)
+    platform13 = Platform(900,-2300,2)
+    platform14 = Platform(500,-2600,2)
+    platform15 = Platform(000,-2800,2)
+    platform16 = Platform(300,-3100,2)
+    platform17 = Platform(800,-3400,2)
     
     
     snake = Snake(100,-75,100,475)
+    snake2 = Snake(700,-275,700,1000)
+    snake3 = Snake(800, -725,800,1175)
+    snake4 = Snake(600, -1575,600,975)
+    snake5 = Snake(500, -2075,500,875)
+    snake6 = Snake(000, -2875,0,375)
     player2 = Player_climber(25,470,platform_list,True,player_color, hight,spike_list)
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
     key = Key(key_x,key_y,player2.change_x)
     
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
-    platform_list.add(platform_test, platform2,platform5,platform8,platform9,platform10,platform11,platform12, platform1,platform3,platform6,platform7,platform13)
-    active_sprite_list.add(snake,caged_bunny,player2,platform_test,platform2,platform1,platform7,platform3,platform6,platform6,platform5,platform8,platform9,platform10,platform11,platform12,platform13,key)
+    platform_list.add(platform_test,platform14,platform15,platform16,platform17, platform2,platform5,platform8,platform9,platform10,platform11,platform12, platform1,platform3,platform6,platform7,platform13)
+    active_sprite_list.add(snake4,snake5,snake6,snake3,snake2,platform14,platform15,platform16,platform17,snake,caged_bunny,player2,platform_test,platform2,platform1,platform7,platform3,platform6,platform6,platform5,platform8,platform9,platform10,platform11,platform12,platform13,key)
+    snake_list.add(snake,snake2,snake3,snake4,snake5,snake6)
     
     background_y_change = 0 
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
@@ -83,6 +94,7 @@ def level_three(color):
     while not done:
     
         for event in pygame.event.get():
+            
             if event.type == pygame.KEYDOWN:
                 
                 if event.key == pygame.K_LEFT:
@@ -111,6 +123,24 @@ def level_three(color):
                 if mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 649 and mouse_y <= 778:
                     done = True
                     raise SystemExit
+                if mouse_x >= 598 and mouse_x <= 1100 and mouse_y >= 400 and mouse_y <= 460:
+                    print("hit")
+                    Constants.game_over = False
+                    screen.blit(background_image,[0,0])
+                    player2.reset()
+                    Platform.platform_move_y = 0 
+                    Caged_Bunny.Cage_move_y = 0  
+                    Key.key_move_x = 0
+                    background_y = -8030
+                    snake.rect.y = -75
+                    snake2.rect.y = -275
+                    snake3.rect.y = -725
+                    snake4.rect.y = -1575
+                    snake5.rect.y = -2075
+                    snake6.rect.y = -2875
+                    
+                    
+                    
 
             
                                     
@@ -146,7 +176,9 @@ def level_three(color):
             if key_collected == False:
                 caged_bunny.get_the_key()
             
-        
+        block_hit_list = pygame.sprite.spritecollide(player2, snake_list, False)
+        for block in block_hit_list:
+            Constants.game_over = True
         
         if key_collected == False and player2.change_x > 0:
             Key.key_move_x += player2.change_x + 2
@@ -161,7 +193,11 @@ def level_three(color):
         Platform.platform_move_y += 2
         Caged_Bunny.Cage_move_x += player2.change_x - 2
         snake.change_y = 2
-
+        snake2.change_y = 2
+        snake3.change_y = 2
+        snake4.change_y = 2
+        snake5.change_y = 2
+        snake6.change_y = 2
             
          
             

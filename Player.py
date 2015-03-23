@@ -329,13 +329,11 @@ class Player(pygame.sprite.Sprite):
         self.change_x -= 3
         self.direction = "L"
     def jump(self):
-        if self.change_y <= 0:
-            if self.rect.y >= 70:
-                self.change_y = -13
-            else:
-                self.change_y = 5
+        
+        if self.rect.y >= 70:
+            self.change_y = -13
         else:
-            None
+            self.change_y = 5
     def reset(self):
         self.rect.x = self.start_x
         self.rect.y = self.start_y
@@ -475,7 +473,7 @@ class Player_climber(pygame.sprite.Sprite):
  
     change_x = 0
     change_y = 0
-
+    
     walking_frames_l = []
     walking_frames_r = []
     walking_frames_u = []
@@ -500,7 +498,8 @@ class Player_climber(pygame.sprite.Sprite):
         self.y = y
         self.list = list_platform
         self.spike_list = spike_list
-
+        self.start_x = x
+        self.start_y = y
         super().__init__()
         sprite_sheet = SpriteSheet("Rabbit_Sprite.png")
         image = sprite_sheet.get_image(bunny_color[0][0],bunny_color[0][1],bunny_color[0][2],bunny_color[0][3])
@@ -566,7 +565,8 @@ class Player_climber(pygame.sprite.Sprite):
                 self.rect.bottom = block.rect.top
             elif self.change_y < 0:
                 self.rect.top = block.rect.bottom
-            
+            if self.rect.top == block.rect.bottom:
+                self.rect.top = block.rect.bottom
  
             # Stop our vertical movement
             self.change_y = 0
@@ -580,7 +580,8 @@ class Player_climber(pygame.sprite.Sprite):
             self.change_y = 0
             
             Constants.game_over = True
-        
+        if self.rect.y == 0:
+            self.rect.y = 0
 
         if self.rect.x <= 5:
             self.rect.x = 5    
@@ -612,8 +613,10 @@ class Player_climber(pygame.sprite.Sprite):
         self.change_x -= 5
         self.direction = "L"
     def jump(self):
-    
-        self.change_y = -8
         
+        self.change_y = -8
+    def reset(self):
+        self.rect.x = self.start_x
+        self.rect.y = self.start_y    
         
 
