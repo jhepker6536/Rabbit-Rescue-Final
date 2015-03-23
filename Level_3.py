@@ -60,8 +60,12 @@ def level_three(color):
     platform13 = Platform(900,-2300,2)
     platform14 = Platform(500,-2600,2)
     platform15 = Platform(000,-2800,2)
-    platform16 = Platform(300,-3100,2)
-    platform17 = Platform(800,-3400,2)
+    platform16 = Platform(500,-3100,2)
+    platform17 = Platform(900,-3400,2)
+    platform17 = Platform(500,-3700,2)
+    platform18 = Platform(00,-3400,2)
+    platform19 = Platform(900,-3400,2)
+    platform20 = Platform(900,-3400,2)
     
     
     snake = Snake(100,-75,100,475)
@@ -83,6 +87,13 @@ def level_three(color):
     background_y_change = 0 
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
     text11 = font2.render("Exit",True,Constants.RED)
+    
+    mute_button = pygame.image.load("Mute_Button.png")
+    unmute_button = pygame.image.load("Muted_Button.png")
+    sound_button = mute_button
+    play_counter = 0
+    pygame.mixer.music.load("BoxCat_Games_-_10_-_Epic_Song.wav")
+    pygame.mixer.music.play(-1,0.0)
     
     clock = pygame.time.Clock()
     done = False
@@ -138,7 +149,14 @@ def level_three(color):
                     snake4.rect.y = -1575
                     snake5.rect.y = -2075
                     snake6.rect.y = -2875
-                    
+                elif mouse_x >= 12 and mouse_x <= 97 and mouse_y >= 675 and mouse_y <= 775:
+                        play_counter += 1 
+                        if play_counter % 2 != 0:
+                            pygame.mixer.music.pause()
+                            sound_button = unmute_button
+                        else:
+                            pygame.mixer.music.play()
+                            sound_button = mute_button    
                     
                     
 
@@ -213,6 +231,7 @@ def level_three(color):
         if player2.rect.x >= 1300 and key_collected == True:
             Constants.level = 3 
             break   
+        screen.blit(sound_button,[12,700])
         pygame.display.flip()
         clock.tick(60)
 

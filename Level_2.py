@@ -72,6 +72,12 @@ def level_two(color):
     clock = pygame.time.Clock()
     done = False
     
+    mute_button = pygame.image.load("Mute_Button.png")
+    unmute_button = pygame.image.load("Muted_Button.png")
+    sound_button = mute_button
+    pygame.mixer.music.load("BoxCat_Games_-_25_-_Victory.wav")
+    pygame.mixer.music.play()
+    play_counter = 0
     
     game_over_image = pygame.image.load("game over.png")
     
@@ -94,6 +100,14 @@ def level_two(color):
                     spike3.spike_move_x = 0
                     spike4.spike_move_x = 0 
                     Key.key_move_x = 0
+                elif mouse_x >= 12 and mouse_x <= 97 and mouse_y >= 675 and mouse_y <= 775:
+                        play_counter += 1 
+                        if play_counter % 2 != 0:
+                            pygame.mixer.music.pause()
+                            sound_button = unmute_button
+                        else:
+                            pygame.mixer.music.play()
+                            sound_button = mute_button
                 if mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 649 and mouse_y <= 778:
                     done = True
                     raise SystemExit 
@@ -182,6 +196,7 @@ def level_two(color):
             Platform.platform_move_x += 3
         active_sprite_list.update()
         active_sprite_list.draw(screen)  
+        screen.blit(sound_button,[12,700])
         if Constants.game_over == True:
             screen.blit(game_over_image,[0,0])   
         if player2.rect.x >= 1300 and key_collected == True:

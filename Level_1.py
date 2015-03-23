@@ -51,20 +51,24 @@ def level_one(color):
     platform6 = Platform(2400,250,1)
     
     player = Player(25,400,platform_list,True,player_color, hight,spike_list=())
-   
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
     key = Key(key_x,key_y,player.change_x)
     
     #snake limits
     
-    sound_button = pygame.image.load("images.jpg")
-    key_list.add(key)
+    mute_button = pygame.image.load("Mute_Button.png")
+    unmute_button = pygame.image.load("Muted_Button.png")
+    sound_button = mute_button
+    play_counter = 0
     
+    key_list.add(key)
     caged_bunny_list.add(caged_bunny)
     platform_list.add(platform_test, platform2, platform1,platform3,platform6)
     active_sprite_list.add(caged_bunny,player,platform_test,platform2,platform1,platform3,platform6,key)
     
-    background_x_change = 0 
+    background_x_change = 0
+    pygame.mixer.music.load("BoxCat_Games_-_10_-_Epic_Song.wav")
+    pygame.mixer.music.play()
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
     text11 = font2.render("Exit",True,Constants.RED)
     
@@ -72,7 +76,8 @@ def level_one(color):
     done = False
     background_image = pygame.image.load("field_background.png")
     background_x = 0
-    play_counter = 0 
+     
+    
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -99,11 +104,12 @@ def level_one(color):
                     raise SystemExit
                 elif mouse_x >= 12 and mouse_x <= 97 and mouse_y >= 675 and mouse_y <= 775:
                         play_counter += 1 
-                        if play_counter % 2 == 0:
+                        if play_counter % 2 != 0:
                             pygame.mixer.music.pause()
+                            sound_button = unmute_button
                         else:
                             pygame.mixer.music.play()
-                        
+                            sound_button = mute_button
                         
             
                                     
@@ -160,7 +166,7 @@ def level_one(color):
             Platform.platform_move_x += 3
         active_sprite_list.update()
         active_sprite_list.draw(screen) 
-        screen.blit(sound_button,[12,675])
+        screen.blit(sound_button,[12,700])
         screen.blit(text11, [1200,710])
         if Constants.game_over == True:
             break  
