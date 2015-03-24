@@ -96,6 +96,17 @@ def level_three(color):
     pygame.mixer.music.load("BoxCat_Games_-_10_-_Epic_Song.wav")
     pygame.mixer.music.play(-1,0.0)
     
+    screen_speed_a = 3
+    screen_speed_b = 2
+    if Constants.difficulty == "easy":
+        screen_speed_a = 3
+        screen_speed_b = 2
+    elif Constants.difficulty == "medium":
+        screen_speed_a = 4
+        screen_speed_b = 3
+    else:
+        screen_speed_a = 5
+        screen_speed_b = 4
     clock = pygame.time.Clock()
     done = False
     
@@ -170,6 +181,8 @@ def level_three(color):
         
         if player2.rect.x <=0:
             player2.rect.x = 0
+        elif player2.rect.x >= width - 50:
+            player2.rect.x = width - 50
         #quit
         screen.blit(text11, [1200,650])    
         pos = pygame.mouse.get_pos()
@@ -185,17 +198,18 @@ def level_three(color):
         for block in block_hit_list:
             key.move_key()
             key_collected = True
-            
+        if player2.rect.y <= 0:
+            player2.rect.y = 0    
             
         block_hit_list = pygame.sprite.spritecollide(player2, caged_bunny_list, False)
         for block in block_hit_list:
             pass
             if key_collected == True:
                 caged_bunny.free()
-                caged_bunny.rect.y -= 300
+                
             if key_collected == False:
                 caged_bunny.get_the_key()
-                caged_bunny.rect.y -= 500
+
             
         block_hit_list = pygame.sprite.spritecollide(player2, snake_list, False)
         for block in block_hit_list:
@@ -210,18 +224,20 @@ def level_three(color):
             pass
             
         if background_y <= -20:    
-            background_y_change = 3
-            Platform.platform_move_y += 2
-            Caged_Bunny.Cage_move_y += 2
-            snake.change_y = 2
-            snake2.change_y = 2
-            snake3.change_y = 2
-            snake4.change_y = 2
-            snake5.change_y = 2
-            snake6.change_y = 2
-            key.key_move_y  = 2   
+            background_y_change = screen_speed_a
+            Platform.platform_move_y += screen_speed_b
+            Caged_Bunny.Cage_move_y += screen_speed_b
+            snake.change_y = screen_speed_b
+            snake2.change_y = screen_speed_b
+            snake3.change_y = screen_speed_b
+            snake4.change_y = screen_speed_b
+            snake5.change_y = screen_speed_b
+            snake6.change_y = screen_speed_b
+            key.key_move_y  = screen_speed_b
          
-        
+        if player2.rect.y >= 768:
+            Constants.game_over = True
+            
                
             
         background_y = background_y + background_y_change 

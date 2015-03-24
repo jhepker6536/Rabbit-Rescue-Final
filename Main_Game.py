@@ -101,7 +101,7 @@ def Rabbit_Rescue():
     color = "Black"
     # Parent while loop
     while not really_done:
-        
+        Constants.difficulty = difficulty
         print(Constants.game_over)
         # child loop containing loading screen!
         while screen_view == 0 and done == False:
