@@ -1,13 +1,8 @@
 import pygame 
-import random 
-from Player import Spikes
-from Player import Player
-from Player import Key
-from Player import Caged_Bunny
-from Player import Snake
+
+from Player import Spikes, Player,Key,Caged_Bunny,Snake
 import Constants
 from Platforms import Platform
-from Spritesheet import SpriteSheet 
 from os.path import sys
 width = 1366
 hight = 768
@@ -142,6 +137,8 @@ def level_two(color):
         
         if player2.rect.x <=0:
             player2.rect.x = 0
+        if player2.rect.y <= 0:
+            player2.rect.y = 0 
         #quit
         screen.blit(text11, [1200,650])    
         pos = pygame.mouse.get_pos()

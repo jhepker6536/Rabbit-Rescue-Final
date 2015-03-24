@@ -44,11 +44,11 @@ def level_one(color):
     active_sprite_list = pygame.sprite.Group()
     key_list = pygame.sprite.Group()
      
-    platform_test = Platform(floor_x,674,0)
-    platform1 = Platform(400,450,1)
-    platform2 = Platform(925,250,1)
-    platform3 = Platform(1600,430,1)
-    platform6 = Platform(2400,250,1)
+    platform_test = Platform(floor_x,740,3)
+    platform1 = Platform(400,450,3)
+    platform2 = Platform(925,250,3)
+    platform3 = Platform(1600,430,3)
+    platform6 = Platform(2400,250,3)
     
     player = Player(25,400,platform_list,True,player_color, hight,spike_list=())
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
@@ -63,7 +63,7 @@ def level_one(color):
     
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
-    platform_list.add(platform_test, platform2, platform1,platform3,platform6)
+    platform_list.add(platform_test,platform2, platform1,platform3,platform6)
     active_sprite_list.add(caged_bunny,player,platform_test,platform2,platform1,platform3,platform6,key)
     
     background_x_change = 0
@@ -74,8 +74,8 @@ def level_one(color):
     
     clock = pygame.time.Clock()
     done = False
-    background_image = pygame.image.load("field_background.png")
-    background_x = 0
+    background_image = pygame.image.load("Space_Level.png")
+    background_x = -20
      
     
     while not done:

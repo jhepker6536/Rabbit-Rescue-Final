@@ -102,11 +102,11 @@ def level_three(color):
         screen_speed_a = 3
         screen_speed_b = 2
     elif Constants.difficulty == "medium":
-        screen_speed_a = 4
+        screen_speed_a = 5
         screen_speed_b = 3
     else:
         screen_speed_a = 5
-        screen_speed_b = 4
+        screen_speed_b = 3
     clock = pygame.time.Clock()
     done = False
     
@@ -220,8 +220,7 @@ def level_three(color):
         elif key_collected == False and player2.change_x < 0:
             Key.key_move_x += player2.change_x - 2    
             
-        if player2.change_y > 0:
-            pass
+        
             
         if background_y <= -20:    
             background_y_change = screen_speed_a
