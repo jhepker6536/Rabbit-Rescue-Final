@@ -115,6 +115,7 @@ class Snake(pygame.sprite.Sprite):
 class Caged_Bunny(pygame.sprite.Sprite):
     caged_bunny_list = []
     Cage_move_x = 0 
+    Cage_move_y = 0 
     image_num = 0
     def __init__(self,x,y,platform):
         self.x = x
@@ -132,6 +133,12 @@ class Caged_Bunny(pygame.sprite.Sprite):
         image = sprite_sheet.get_image(759, 89, 215, 641)
         self.caged_bunny_list.append(image)
         image.set_colorkey(Constants.WHITE)
+        image = sprite_sheet.get_image(999, 121, 215, 613)
+        self.caged_bunny_list.append(image)
+        image.set_colorkey(Constants.WHITE)
+        image = sprite_sheet.get_image(1215, 381, 215, 357)
+        self.caged_bunny_list.append(image)
+        image.set_colorkey(Constants.WHITE)
         
         
         self.image = self.caged_bunny_list[self.image_num]
@@ -145,14 +152,18 @@ class Caged_Bunny(pygame.sprite.Sprite):
             self.rect.y = self.y - 190
         elif self.image_num == 2: 
             self.rect.y = self.y - 494
+        
         self.rect.x = self.x - self.Cage_move_x
+        self.rect.y = self.y + self.Cage_move_y
     def free(self):
         self.image_num = 2
     def get_the_key(self):
         self.image_num = 1
+
 class Key(pygame.sprite.Sprite):
     key_list = []
     key_move_x = 0 
+    key_move_y = 0 
     move = False
     def __init__(self, x,y,change):
         self.x = x
@@ -170,8 +181,9 @@ class Key(pygame.sprite.Sprite):
         self.rect.x =self.x
         self.rect.y =self.y 
     def update(self):
+        self.rect.y = self.y - self.key_move_y
         if self.move == False:
-            self.rect.x = self.x - self.key_move_x
+            self.rect.x = self.x - self.key_move_x     
         elif self.move == True:
             self.rect.x = 10
         

@@ -25,7 +25,7 @@ screen = pygame.display.set_mode((width, hight), pygame.FULLSCREEN, 32)
 # Button Rectangle class
  
 
-def main():
+def Rabbit_Rescue():
     """ Main function for the game. """
     pygame.init()   
     # Random Variables
@@ -33,7 +33,7 @@ def main():
     
    
     pygame.mixer.music.load("song1.mp3")
-    pygame.mixer.music.play(3)   
+    pygame.mixer.music.play(1)   
     # Ad sprites to list 
     
     sitting_bunny_list = pygame.sprite.Group()
@@ -315,4 +315,4 @@ def main():
             
                     
 if __name__ == "__main__":
-    main()
+    Rabbit_Rescue()
