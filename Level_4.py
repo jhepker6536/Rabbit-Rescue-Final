@@ -9,7 +9,7 @@ width = 1366
 hight = 768
 
 
-def level_one(color):
+def level_four(color):
     pygame.init()
     screen = pygame.display.set_mode([width,hight], pygame.FULLSCREEN, 32)
     mouse_x = 0
@@ -44,7 +44,7 @@ def level_one(color):
     active_sprite_list = pygame.sprite.Group()
     key_list = pygame.sprite.Group()
      
-    platform_test = Platform(floor_x,740,3)
+    platform_test = Platform(floor_x,700,3)
     platform1 = Platform(400,450,3)
     platform2 = Platform(925,250,3)
     platform3 = Platform(1600,430,3)
@@ -71,6 +71,8 @@ def level_one(color):
     pygame.mixer.music.play()
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
     text11 = font2.render("Exit",True,Constants.RED)
+    
+    game_over_image = pygame.image.load("game over.png")
     
     clock = pygame.time.Clock()
     done = False
@@ -110,6 +112,14 @@ def level_one(color):
                         else:
                             pygame.mixer.music.play()
                             sound_button = mute_button
+                elif mouse_x >= 598 and mouse_x <= 1100 and mouse_y >= 400 and mouse_y <= 460:
+                    print("hit")
+                    Constants.game_over = False
+                    screen.blit(background_image,[0,0])
+                    player.reset()
+                    Platform.platform_move_x = 0 
+                    Caged_Bunny.Cage_move_x = 0 
+                    Key.key_move_x = 0
                         
             
                                     
@@ -134,7 +144,8 @@ def level_one(color):
         for block in block_hit_list:
             key.move_key()
             key_collected = True
-            
+        if player.rect.y >= 768:
+            Constants.game_over = True   
           
         block_hit_list = pygame.sprite.spritecollide(player, caged_bunny_list, False)
         for block in block_hit_list:
@@ -171,7 +182,7 @@ def level_one(color):
         screen.blit(sound_button,[12,700])
         screen.blit(text11, [1200,710])
         if Constants.game_over == True:
-            break  
+            screen.blit(game_over_image,[0,0])  
         if player.rect.x >= 1300 and key_collected == True:
             Constants.level = 2
             break

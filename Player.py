@@ -142,11 +142,11 @@ class Caged_Bunny(pygame.sprite.Sprite):
     def update(self):
         self.image = self.caged_bunny_list[self.image_num]
         if self.image_num == 0:
-            self.rect.y = self.y
+            self.rect.y = self.y - self.Cage_move_y
         elif self.image_num == 1:
-            self.rect.y = self.y - 190
+            self.rect.y = self.y - 190 - self.Cage_move_y
         elif self.image_num == 2: 
-            self.rect.y = self.y - 494
+            self.rect.y = self.y - 494 - self.Cage_move_y
         
         self.rect.x = self.x - self.Cage_move_x
         
@@ -173,14 +173,16 @@ class Key(pygame.sprite.Sprite):
         
         self.image = self.key_list[0]
         self.rect = self.image.get_rect()        
-        self.rect.x =self.x
-        self.rect.y =self.y 
+        self.rect.x = self.x
+        self.rect.y = self.y 
     def update(self):
-
+        
         if self.move == False:
-            self.rect.x = self.x - self.key_move_x      
+            self.rect.x = self.x - self.key_move_x 
+            self.rect.y += + self.key_move_y        
         elif self.move == True:
             self.rect.x = 10
+            self.rect.y = 0
         
     def move_key(self):
         self.rect.x = 10

@@ -17,8 +17,8 @@ def level_three(color):
     mouse_x = 0  
     key_collected = False
     mouse_y = 0 
-    key_x = 1940
-    key_y = 100
+    key_x = 1000
+    key_y = -2400
     floor_x = 0  
     caged_bunny_list = pygame.sprite.Group()
     platform_list = pygame.sprite.Group()
@@ -66,7 +66,7 @@ def level_three(color):
     platform19 = Platform(0,-3900,2)
     platform20 = Platform(400,-4200,2)
     platform21 = Platform(800,-4400,2)
-    platform22 = Platform(400,-4600,2)
+    platform22 = Platform(400,-4700,2)
     platform23 = Platform(100,-4900,2)
     
     snake = Snake(100,-75,100,475)
@@ -76,8 +76,8 @@ def level_three(color):
     snake5 = Snake(500, -2075,500,875)
     snake6 = Snake(000, -2875,0,375)
     player2 = Player_climber(25,470,platform_list,True,player_color, hight,spike_list)
-    caged_bunny = Caged_Bunny(150,-5050,platform_list) 
-    key = Key(key_x,key_y,player2.change_x)
+    caged_bunny = Caged_Bunny(150,-5035,platform_list) 
+    key = Key(key_x,key_y,0)
     
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
@@ -153,7 +153,7 @@ def level_three(color):
                     player2.reset()
                     Platform.platform_move_y = 0 
                     Caged_Bunny.Cage_move_y = 0  
-                    Key.key_move_x = 0
+                    Key.key_move_y = 0
                     background_y = -8030
                     snake.rect.y = -75
                     snake2.rect.y = -275
@@ -192,7 +192,7 @@ def level_three(color):
             floor_x = -7
         mouse_x = pos[0]
         mouse_y = pos[1]
-        
+        print(key.rect.x)
         caged_bunny_list.draw(screen)
         block_hit_list = pygame.sprite.spritecollide(player2, key_list, False)
         for block in block_hit_list:
@@ -215,17 +215,14 @@ def level_three(color):
         for block in block_hit_list:
             Constants.game_over = True
         
-        if key_collected == False and player2.change_x > 0:
-            Key.key_move_x += player2.change_x + 2
-        elif key_collected == False and player2.change_x < 0:
-            Key.key_move_x += player2.change_x - 2    
+          
             
         
             
         if background_y <= -20:    
             background_y_change = screen_speed_a
             Platform.platform_move_y += screen_speed_b
-            Caged_Bunny.Cage_move_y += screen_speed_b
+            Caged_Bunny.Cage_move_y -= screen_speed_b
             snake.change_y = screen_speed_b
             snake2.change_y = screen_speed_b
             snake3.change_y = screen_speed_b

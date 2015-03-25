@@ -16,7 +16,7 @@ def level_two(color):
     mouse_y = 0 
     key_x = 1940
     key_y = 100
-    floor_x = 0  
+    floor_x = -400  
     caged_bunny_list = pygame.sprite.Group()
     platform_list = pygame.sprite.Group()
     active_sprite_list = pygame.sprite.Group()
@@ -40,7 +40,7 @@ def level_two(color):
     else:
         player_color = Player.black_bunny
         
-        
+    secondary = Platform(-4000,674,0)    
     platform_test = Platform(floor_x,674,0)
     platform1 = Platform(400,450,1)
     platform2 = Platform(1200,450,1)

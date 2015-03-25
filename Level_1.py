@@ -74,7 +74,7 @@ def level_one(color):
     
     clock = pygame.time.Clock()
     done = False
-    background_image = pygame.image.load("field_background.png")
+    background_image = pygame.image.load("field_background2.png")
     background_x = 0
      
     

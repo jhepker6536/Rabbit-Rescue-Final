@@ -5,6 +5,7 @@ from Platforms import Platform
 from Level_1 import level_one
 from Level_2 import level_two
 from Level_3 import level_three
+from Level_4 import level_four
 import Constants
  
 
@@ -161,6 +162,12 @@ def Rabbit_Rescue():
                             Key.key_move_x = 0 
                             print(Constants.game_over)
                             level_three(color)
+                        while(Constants.level == 4) and Constants.game_over == False:
+                            Platform.platform_move_x = 0 
+                            Caged_Bunny.Cage_move_x = 0 
+                            Key.key_move_x = 0 
+                            print(Constants.game_over)
+                            level_four(color)
                             
 
                         
