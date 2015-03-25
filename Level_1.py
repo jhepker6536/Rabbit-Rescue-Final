@@ -1,5 +1,5 @@
 import pygame 
-from Player import Player, Key, Caged_Bunny
+from Player import Player, Key, Caged_Bunny,Bird
 import Constants
 from Platforms import Platform
 
@@ -49,6 +49,7 @@ def level_one(color):
     platform2 = Platform(925,250,1)
     platform3 = Platform(1600,430,1)
     platform6 = Platform(2400,250,1)
+    bird = Bird(900,200)
     
     player = Player(25,400,platform_list,True,player_color, hight,spike_list=())
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
@@ -64,7 +65,7 @@ def level_one(color):
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
     platform_list.add(platform_test, platform2, platform1,platform3,platform6)
-    active_sprite_list.add(caged_bunny,player,platform_test,platform2,platform1,platform3,platform6,key)
+    active_sprite_list.add(bird,caged_bunny,player,platform_test,platform2,platform1,platform3,platform6,key)
     
     background_x_change = 0
     pygame.mixer.music.load("BoxCat_Games_-_10_-_Epic_Song.wav")
@@ -118,7 +119,7 @@ def level_one(color):
         screen.blit(background_image, [background_x, 0])
         
         #quit
-        print(play_counter)    
+        print(bird.rect.x)    
         pos = pygame.mouse.get_pos()
         if background_x > 0:
             background_x = -7

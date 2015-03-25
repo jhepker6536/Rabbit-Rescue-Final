@@ -5,6 +5,49 @@ import random
 import Player
 #Player Colors
 
+class Bird(pygame.sprite.Sprite):
+    bird = []
+    bird_move_x = -3
+    bird_move_y = 0 
+    direction = "R"
+    def __init__(self, x,y):
+        self.x = x
+        self.y = y
+        self.start_x = x
+        self.start_y = y
+        self.change_x = -3
+        self.change_y = 0
+        
+        super().__init__()
+ 
+        sprite_sheet = SpriteSheet("Caged Bunnies.png")
+        image = sprite_sheet.get_image(29, 779, 236, 161)
+        image.set_colorkey(Constants.WHITE)
+        self.bird.append(image)
+        image = sprite_sheet.get_image(497, 806, 220, 117)
+        image.set_colorkey(Constants.WHITE)
+        self.bird.append(image)
+        image = sprite_sheet.get_image(269, 810, 207, 113)
+        image.set_colorkey(Constants.WHITE)
+        self.bird.append(image)
+        
+        self.image = self.bird[0]
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+    def update(self):
+        self.rect.x += self.change_x 
+        self.rect.y += self.change_y
+        pos = self.rect.x 
+        
+        if self.direction == "R":
+            frame = (pos // 20) % len(self.bird)
+            self.image = self.bird[frame]
+    def reset(self):
+        self.rect.x = self.start_x
+        self.rect.y = self.start_y
+        
+#Spike Class        
 class Spikes(pygame.sprite.Sprite):
     spike = []
     spike_move_x = 0
@@ -27,29 +70,9 @@ class Spikes(pygame.sprite.Sprite):
     def update(self):
         self.rect.x = self.x - self.spike_move_x
         self.rect.y = self.y + self.spike_move_y
-    
-class Snake_limits(pygame.sprite.Sprite):
-    limit_move = 0 
-    snake_limit_list = []
-    def __init__(self,x,y):
-        super().__init__()
-        
-        self.x = x
-        self.y = y
-        self.y_change = 0 
-        
-        sprite_sheet = SpriteSheet("Caged Bunnies.png")
-        image = sprite_sheet.get_image(589, 70, 2, 12)
-        self.snake_limit_list.append(image)
-          
-        self.image = self.snake_limit_list[0]
-        self.rect = self.image.get_rect()
-        
-    def update(self):
-        self.rect.x = self.x 
-        self.rect.y = self.y + self.y_change
-                
-    
+  
+
+#snake class   
 class Snake(pygame.sprite.Sprite):
     snake_right = []
     snake_left = []
@@ -111,7 +134,7 @@ class Snake(pygame.sprite.Sprite):
         else:
             self.direction = "L"
         
-    
+#Caged bunny class
 class Caged_Bunny(pygame.sprite.Sprite):
     caged_bunny_list = []
     Cage_move_x = 0 
@@ -155,6 +178,7 @@ class Caged_Bunny(pygame.sprite.Sprite):
     def get_the_key(self):
         self.image_num = 1
 
+#Key Class
 class Key(pygame.sprite.Sprite):
     key_list = []
     key_move_x = 0 
@@ -190,7 +214,7 @@ class Key(pygame.sprite.Sprite):
         self.move = True
     
     
-        
+#main player class        
 class Player(pygame.sprite.Sprite):
  
     change_x = 0
@@ -347,6 +371,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = self.start_x
         self.rect.y = self.start_y
         
+        
+#Animated bunnies for the main screen
 class Animated_Player(pygame.sprite.Sprite):
     
     
@@ -444,40 +470,9 @@ class Animated_Player(pygame.sprite.Sprite):
     def go_left(self):
         self.change_x = -3
         self.direction = "L"
-class Not_Moving_Bunny():
-    
-    brown_bunny = ([35,2,95,88],[20,101,110,122],[5,226,137,116])
-    black_bunny = ([179,0,102,88],[183,89,111,113],[175,198,137,130])
-    green_bunny = ([389,14,99,88],[389,114,115,123],[367,232,139,127])
-    blue_bunny = ([595,0,93,88],[612,92,115,123],[535,214,141,122])
-    purple_bunny =([475,350,98,89],[486,470,110,112],[460,580,132,94])
-    bunny_list = (brown_bunny, black_bunny, green_bunny, blue_bunny,purple_bunny)
-    rabbit = None
-    rabbit_list = []
-    def __init__(self,c, x, y): 
-        super().__init__()
-        self.x = x 
-        self.y = y
-        self.bunny_color = c
-        self.rabbit = self.bunny_list[self.bunny_color]
-        self.rabbit_x = self.rabbit[0][0]
-        self.rabbit_y = self.rabbit[0][1]
-        self.rabbit_w = self.rabbit[0][2]
-        self.rabbit_l = self.rabbit[0][3]
         
         
-        sprite_sheet = SpriteSheet("Rabbit_Sprite.png")
-        image = sprite_sheet.get_image(self.rabbit_x,self.rabbit_y,self.rabbit_w,self.rabbit_l)
-        self.rabbit_list.append(image)
-        image.set_colorkey(Constants.YELLOW)
-        
-        
-        self.image = self.rabbit_list[0]
-        self.rect = self.image.get_rect()        
-        image.set_colorkey(Constants.YELLOW)
-    
-        self.rect.y = self.y
-        self.rect.x = self.x
+#bunnies for the up level
 class Player_climber(pygame.sprite.Sprite):
  
     change_x = 0
@@ -627,5 +622,128 @@ class Player_climber(pygame.sprite.Sprite):
     def reset(self):
         self.rect.x = self.start_x
         self.rect.y = self.start_y    
+
+#still bunnies to display information         
+class Not_Moving_Bunny():
+    
+    brown_bunny = ([35,2,95,88],[20,101,110,122],[5,226,137,116])
+    black_bunny = ([179,0,102,88],[183,89,111,113],[175,198,137,130])
+    green_bunny = ([389,14,99,88],[389,114,115,123],[367,232,139,127])
+    blue_bunny = ([595,0,93,88],[612,92,115,123],[535,214,141,122])
+    purple_bunny =([475,350,98,89],[486,470,110,112],[460,580,132,94])
+    bunny_list = (brown_bunny, black_bunny, green_bunny, blue_bunny,purple_bunny)
+    rabbit = None
+    rabbit_list = []
+    def __init__(self,c, x, y): 
+        super().__init__()
+        self.x = x 
+        self.y = y
+        self.bunny_color = c
+        self.rabbit = self.bunny_list[self.bunny_color]
+        self.rabbit_x = self.rabbit[0][0]
+        self.rabbit_y = self.rabbit[0][1]
+        self.rabbit_w = self.rabbit[0][2]
+        self.rabbit_l = self.rabbit[0][3]
+        
+        
+        sprite_sheet = SpriteSheet("Rabbit_Sprite.png")
+        image = sprite_sheet.get_image(self.rabbit_x,self.rabbit_y,self.rabbit_w,self.rabbit_l)
+        self.rabbit_list.append(image)
+        image.set_colorkey(Constants.YELLOW)
+        
+        
+        self.image = self.rabbit_list[0]
+        self.rect = self.image.get_rect()        
+        image.set_colorkey(Constants.YELLOW)
+    
+        self.rect.y = self.y
+        self.rect.x = self.x
+#Bunnies for the down level   
+class Player_faller(pygame.sprite.Sprite):
+ 
+    change_x = 0
+    change_y = 0
+
+    falling_frames_l = []
+    falling_frames_r = []
+    falling_frames_s = []
+    brown_bunny = ([35,2,95,88],[20,101,110,122],[5,226,137,116])
+    black_bunny = ([179,0,102,88],[183,89,111,113],[175,198,137,130])
+    green_bunny = ([389,14,99,88],[389,114,115,123],[367,232,139,127])
+    blue_bunny = ([0,0,90,113],[90,0,84,116],[175,0,88,112])
+    purple_bunny =([475,350,98,85],[486,470,110,112],[460,580,132,94])
+    white_bunny = ([25,339,101,93],[44,449,111,110],[40,565,135,97])
+    yellow_bunny = ([656,305,104,91],[636,419,113,113],[605,545,134,94])
+    pink_bunny = ([234,331,101,91],[235,443,114,107],[232,556,138,103])
+    direction = "S"
+
+    
+    level = None
+
+    
+    def __init__(self,x,y,bunny_color): 
+        self.x = x
+        self.y = y
+        self.start_x = x
+        self.start_y = y
         
 
+        super().__init__()
+        sprite_sheet = SpriteSheet("Parachute Rabbit.png")
+        image = sprite_sheet.get_image(bunny_color[0][0],bunny_color[0][1],bunny_color[0][2],bunny_color[0][3])
+        self.falling_frames_r.append(image)
+        image.set_colorkey(Constants.YELLOW)
+        image = sprite_sheet.get_image(bunny_color[1][0],bunny_color[1][1],bunny_color[1][2],bunny_color[1][3])
+        self.falling_frames_s.append(image)
+        image.set_colorkey(Constants.YELLOW)
+        image = sprite_sheet.get_image(bunny_color[2][0],bunny_color[2][1],bunny_color[2][2],bunny_color[2][3])
+        self.falling_frames_l.append(image)
+        image.set_colorkey(Constants.YELLOW)
+        
+        
+        self.image = self.falling_frames_s[0]
+        self.rect = self.image.get_rect()        
+        image.set_colorkey(Constants.YELLOW)
+        self.rect.y = self.y
+        self.rect.x = self.x
+
+    def update(self):
+        
+        
+        self.rect.y += self.change_y
+        self.rect.x += self.change_x 
+         
+        if self.direction == "R":
+            self.image = self.falling_frames_r
+
+        elif self.direction == "L":
+            self.image = self.falling_frames_l
+        else:
+            self.image = self.falling_frames_s
+        self.calc_grav()
+               
+        
+            
+        
+        
+              
+    def calc_grav(self):    
+        
+        self.change_y += .003
+                 
+
+    def go_right(self):
+        self.change_x = 3
+        self.direction = "R"
+    def stop(self):
+        self.change_x = 0 
+        self.direction = "S"
+ 
+     
+    def go_left(self):
+        self.change_x -= 3
+        self.direction = "L"
+    def reset(self):
+        self.rect.x = self.start_x
+        self.rect.y = self.start_y
+        

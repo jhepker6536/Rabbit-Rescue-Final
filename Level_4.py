@@ -49,7 +49,7 @@ def level_four(color):
     platform2 = Platform(925,250,3)
     platform3 = Platform(1600,430,3)
     platform6 = Platform(2400,250,3)
-    
+    platform7 = Platform(3000, 670,3)
     player = Player(25,400,platform_list,True,player_color, hight,spike_list=())
     caged_bunny = Caged_Bunny(3050,525,platform_list) 
     key = Key(key_x,key_y,player.change_x)
@@ -63,8 +63,8 @@ def level_four(color):
     
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
-    platform_list.add(platform_test,platform2, platform1,platform3,platform6)
-    active_sprite_list.add(caged_bunny,player,platform_test,platform2,platform1,platform3,platform6,key)
+    platform_list.add(platform_test,platform2,platform7,platform1,platform3,platform6)
+    active_sprite_list.add(caged_bunny, platform7, player,platform_test,platform2,platform1,platform3,platform6,key)
     
     background_x_change = 0
     pygame.mixer.music.load("BoxCat_Games_-_10_-_Epic_Song.wav")
@@ -191,5 +191,5 @@ def level_four(color):
         
     pygame.quit()
 if __name__ == "__main__":
-    level_one("White") 
+    level_four("White") 
     

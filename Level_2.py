@@ -3,7 +3,7 @@ import pygame
 from Player import Spikes, Player,Key,Caged_Bunny,Snake
 import Constants
 from Platforms import Platform
-from os.path import sys
+
 width = 1366
 hight = 768
 
