@@ -1,9 +1,10 @@
 import pygame 
-from Player import Player_faller, Bird
+from Player import Player_faller, Bird,Player_falling
 
 
 import Constants
 from Platforms import Platform 
+
 
 width = 1366
 hight = 768
@@ -17,6 +18,7 @@ def level_five(color):
     bird_list = []
     floor_x = 0  
     active_sprite_list = pygame.sprite.Group()
+    player_list = pygame.sprite.Group()
     
     if color == "Blue":
         player_color = Player_faller.blue_bunny
@@ -37,10 +39,10 @@ def level_five(color):
         
         
     
-    player = Player_faller(3,10,player_color)
+    player = Player_falling(3,10,player_color)
     bird1 = Bird(1000,300)
-    active_sprite_list.add(player,bird1)
-    
+    active_sprite_list.add(player)
+    player_list.add(player)
     
     background_y_change = 0 
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
@@ -75,8 +77,6 @@ def level_five(color):
                 elif event.key == pygame.K_RIGHT:
                     player.go_right()
                      
-                elif event.key == pygame.K_SPACE:
-                    player.jump()
                     
                         
             elif event.type == pygame.KEYUP:
@@ -131,34 +131,22 @@ def level_five(color):
             floor_x = -7
         mouse_x = pos[0]
         mouse_y = pos[1]
-        
-        
         if player.rect.y <= 0:
             player.rect.y = 0    
-            
-        
-        
             
         block_hit_list = pygame.sprite.spritecollide(player, bird_list, False)
         for block in block_hit_list:
             Constants.game_over = True
         
-          
-            
-        
-            
-            
         if player.rect.y >= 768:
             Constants.game_over = True
-            
-               
-            
         background_y = background_y + background_y_change 
         
         if player.rect.x == width:
             Platform.platform_move_x += 3
         active_sprite_list.update()
         active_sprite_list.draw(screen)
+        
           
         if Constants.game_over == True:
             screen.blit(game_over_image,[0,0])    

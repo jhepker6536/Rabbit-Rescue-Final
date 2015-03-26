@@ -13,7 +13,7 @@ def level_three(color):
     key_collected = False
     mouse_y = 0 
     key_x = 1000
-    key_y = -2400
+    key_y = -2450
     floor_x = 0  
     caged_bunny_list = pygame.sprite.Group()
     platform_list = pygame.sprite.Group()
@@ -53,7 +53,7 @@ def level_three(color):
     platform11 = Platform(100,-1800,2)
     platform12 = Platform(500,-2000,2)
     platform13 = Platform(900,-2300,2)
-    platform14 = Platform(500,-2600,2)
+    platform14 = Platform(400,-2600,2)
     platform15 = Platform(000,-2800,2)
     platform16 = Platform(500,-3100,2)
     platform17 = Platform(900,-3400,2)

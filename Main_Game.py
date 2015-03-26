@@ -33,7 +33,7 @@ def Rabbit_Rescue():
     
     
    
-    pygame.mixer.music.load("song1.mp3")
+    pygame.mixer.music.load("BoxCat_Games_-_25_-_Victory.wav")
     pygame.mixer.music.play(1)   
     # Ad sprites to list 
     
@@ -86,7 +86,7 @@ def Rabbit_Rescue():
  
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
-    Constants.level = 3
+    Constants.level = 1
     # What screen we see and background
     background_image = pygame.image.load("Field.png")
     background_image2 = pygame.image.load("Field_old_look.png")

@@ -1,6 +1,6 @@
 import pygame 
 
-from Player import Spikes, Player,Key,Caged_Bunny,Snake
+from Player import Spikes, Player,Key,Caged_Bunny,Snake, Player_faller
 import Constants
 from Platforms import Platform
 
@@ -40,7 +40,7 @@ def level_two(color):
     else:
         player_color = Player.black_bunny
         
-    secondary = Platform(-4000,674,0)    
+      
     platform_test = Platform(floor_x,674,0)
     platform1 = Platform(400,450,1)
     platform2 = Platform(1200,450,1)
@@ -48,6 +48,7 @@ def level_two(color):
     platform6 = Platform(2400,400,1)
     
     player2 = Player(25,400,platform_list,True,player_color, hight,spike_list)
+    
     spike = Spikes(755,580)
     spike2 = Spikes(736,580)
     spike3 = Spikes(1536,580)
