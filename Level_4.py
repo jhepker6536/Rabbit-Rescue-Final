@@ -51,7 +51,7 @@ def level_four(color):
     platform6 = Platform(2400,250,3)
     platform7 = Platform(3000, 670,3)
     player = Player(25,400,platform_list,True,player_color, hight,spike_list=())
-    caged_bunny = Caged_Bunny(3050,525,platform_list) 
+    caged_bunny = Caged_Bunny(3170,524,platform_list) 
     key = Key(key_x,key_y,player.change_x)
     
     #snake limits
@@ -71,7 +71,6 @@ def level_four(color):
     pygame.mixer.music.play()
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
     text11 = font2.render("Exit",True,Constants.RED)
-    
     game_over_image = pygame.image.load("game over.png")
     
     clock = pygame.time.Clock()
@@ -152,6 +151,7 @@ def level_four(color):
             pass
             if key_collected == True:
                 caged_bunny.free()
+                
             if key_collected == False:
                 caged_bunny.get_the_key()
             
@@ -183,7 +183,7 @@ def level_four(color):
         screen.blit(text11, [1200,710])
         if Constants.game_over == True:
             screen.blit(game_over_image,[0,0])  
-        if player.rect.x >= 1300 and key_collected == True:
+        if player.rect.x >= 1500 and key_collected == True:
             Constants.level = 2
             break
         pygame.display.flip()

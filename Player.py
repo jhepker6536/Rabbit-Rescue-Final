@@ -87,19 +87,19 @@ class Snake(pygame.sprite.Sprite):
         self.limit_two = limit_two
         self.y = y
         super().__init__()
-        sprite_sheet = SpriteSheet("Snakes.png")
-        image = sprite_sheet.get_image(4, 1, 115, 82)
+        sprite_sheet = SpriteSheet("Caged Bunnies.png")
+        image = sprite_sheet.get_image(2, 1009, 117, 83)
         self.snake_right.append(image)
         image.set_colorkey(Constants.WHITE)
-        image = sprite_sheet.get_image(124, 2,87, 89)
+        image = sprite_sheet.get_image(121, 1010,90, 80)
         self.snake_right.append(image)
         image.set_colorkey(Constants.WHITE)
         
-        image = sprite_sheet.get_image(4, 1, 115, 82)
+        image = sprite_sheet.get_image(2, 1009, 117, 83)
         image = pygame.transform.flip(image, True, False)
         self.snake_left.append(image)
         image.set_colorkey(Constants.WHITE)
-        image = sprite_sheet.get_image(124, 2,87, 89)
+        image = sprite_sheet.get_image(121, 1010,90, 80)
         image = pygame.transform.flip(image, True, False)
         self.snake_left.append(image)
         image.set_colorkey(Constants.WHITE)
@@ -190,8 +190,8 @@ class Key(pygame.sprite.Sprite):
         self.player = list
         self.y = y
         super().__init__()
-        sprite_sheet = SpriteSheet("Sprites.png")
-        image = sprite_sheet.get_image(544,4,82,86)
+        sprite_sheet = SpriteSheet("Caged Bunnies.png")
+        image = sprite_sheet.get_image(800,789,85,89)
         self.key_list.append(image)
         image.set_colorkey(Constants.WHITE)
         
@@ -662,112 +662,25 @@ class Not_Moving_Bunny():
 #Bunnies for the down level   
 
 
-class Player_faller(pygame.sprite.Sprite):
+
+class Player_Falling(pygame.sprite.Sprite):
  
     change_x = 0
     change_y = 0
-
-    falling_frames_l = []
-    falling_frames_r = []
-    falling_frames_s = []
-    brown_bunny = ([35,2,95,88],[20,101,110,122],[5,226,137,116])
-    black_bunny = ([179,0,102,88],[183,89,111,113],[175,198,137,130])
-    green_bunny = ([389,14,99,88],[389,114,115,123],[367,232,139,127])
-    blue_bunny = ([0,0,90,113],[90,0,84,116],[175,0,88,112])
-    purple_bunny =([475,350,98,85],[486,470,110,112],[460,580,132,94])
-    white_bunny = ([25,339,101,93],[44,449,111,110],[40,565,135,97])
-    yellow_bunny = ([656,305,104,91],[636,419,113,113],[605,545,134,94])
-    pink_bunny = ([234,331,101,91],[235,443,114,107],[232,556,138,103])
     direction = "S"
-
-    
-    level = None
-
-    
-    def __init__(self,x,y,bunny_color): 
-        self.x = x
-        self.y = y
-        self.start_x = x
-        self.start_y = y
-        
-
-        super().__init__()
-        sprite_sheet = SpriteSheet("Parachute Rabbit.png")
-        image = sprite_sheet.get_image(bunny_color[0][0],bunny_color[0][1],bunny_color[0][2],bunny_color[0][3])
-        self.falling_frames_r.append(image)
-        image.set_colorkey(Constants.YELLOW)
-        image = sprite_sheet.get_image(bunny_color[1][0],bunny_color[1][1],bunny_color[1][2],bunny_color[1][3])
-        self.falling_frames_s.append(image)
-        image.set_colorkey(Constants.YELLOW)
-        image = sprite_sheet.get_image(bunny_color[2][0],bunny_color[2][1],bunny_color[2][2],bunny_color[2][3])
-        self.falling_frames_l.append(image)
-        image.set_colorkey(Constants.YELLOW)
-        
-        
-        self.image = self.falling_frames_s[0]
-        self.rect = self.image.get_rect()        
-        image.set_colorkey(Constants.YELLOW)
-        self.rect.y = self.y
-        self.rect.x = self.x
-
-    def update(self):
-        
-        
-        self.rect.y += self.change_y
-        self.rect.x += self.change_x 
-         
-        if self.direction == "R":
-            self.image = self.falling_frames_r
-
-        elif self.direction == "L":
-            self.image = self.falling_frames_l
-        else:
-            self.image = self.falling_frames_s
-        self.calc_grav()
-               
-        
-            
-        
-        
-              
-    def calc_grav(self):    
-        
-        self.change_y += .003
-                 
-
-    def go_right(self):
-        self.change_x = 3
-        self.direction = "R"
-    def stop(self):
-        self.change_x = 0 
-        self.direction = "S"
- 
-     
-    def go_left(self):
-        self.change_x -= 3
-        self.direction = "L"
-    def reset(self):
-        self.rect.x = self.start_x
-        self.rect.y = self.start_y
-
-class Player(pygame.sprite.Sprite):
- 
-    change_x = 0
-    change_y = 0
-
     walking_frames_l = []
     walking_frames_r = []
-    walking_frames_u = []
+    walking_frames_s = []
    
     brown_bunny = ([35,2,95,88],[20,101,110,122],[5,226,137,116])
     black_bunny = ([179,0,102,88],[183,89,111,113],[175,198,137,130])
     green_bunny = ([389,14,99,88],[389,114,115,123],[367,232,139,127])
-    blue_bunny = ([595,0,93,88],[612,92,115,123],[535,214,141,122])
+    blue_bunny = ([1500,40,172,216],[1672,38,170,222],[1842,36,174,219])
     purple_bunny =([475,350,98,85],[486,470,110,112],[460,580,132,94])
     white_bunny = ([25,339,101,93],[44,449,111,110],[40,565,135,97])
     yellow_bunny = ([656,305,104,91],[636,419,113,113],[605,545,134,94])
     pink_bunny = ([234,331,101,91],[235,443,114,107],[232,556,138,103])
-    direction = "R"
+    
 
     
     level = None
@@ -784,43 +697,29 @@ class Player(pygame.sprite.Sprite):
         self.spike_list = spike_list
 
         super().__init__()
-        sprite_sheet = SpriteSheet("Rabbit_Sprite.png")
+        sprite_sheet = SpriteSheet("Caged Bunnies.png")
         image = sprite_sheet.get_image(bunny_color[0][0],bunny_color[0][1],bunny_color[0][2],bunny_color[0][3])
-        self.walking_frames_r.append(image)
-        image.set_colorkey(Constants.YELLOW)
+        self.walking_frames_l.append(image)
+        image.set_colorkey(Constants.WHITE)
         image = sprite_sheet.get_image(bunny_color[1][0],bunny_color[1][1],bunny_color[1][2],bunny_color[1][3])
-        self.walking_frames_r.append(image)
-        image.set_colorkey(Constants.YELLOW)
+        self.walking_frames_s.append(image)
+        image.set_colorkey(Constants.WHITE)
         image = sprite_sheet.get_image(bunny_color[2][0],bunny_color[2][1],bunny_color[2][2],bunny_color[2][3])
         self.walking_frames_r.append(image)
-        image.set_colorkey(Constants.YELLOW)
+        image.set_colorkey(Constants.WHITE)
         
         
-        image = sprite_sheet.get_image(bunny_color[0][0],bunny_color[0][1],bunny_color[0][2],bunny_color[0][3])
-        image = pygame.transform.flip(image, True, False)
-        self.walking_frames_l.append(image)
-        image.set_colorkey(Constants.YELLOW)
-        image = sprite_sheet.get_image(bunny_color[2][0],bunny_color[2][1],bunny_color[2][2],bunny_color[2][3])
-        image = pygame.transform.flip(image, True, False)
-        self.walking_frames_l.append(image)
-        image.set_colorkey(Constants.YELLOW)
-        image = sprite_sheet.get_image(bunny_color[1][0],bunny_color[1][1],bunny_color[1][2],bunny_color[1][3])
-        image = pygame.transform.flip(image, True, False)
-        self.walking_frames_l.append(image)
-        image.set_colorkey(Constants.YELLOW)
-        
-        image = sprite_sheet.get_image(99, 57, 56, 79)
-        self.walking_frames_u.append(image)
         
         self.image = self.walking_frames_r[0]
         self.rect = self.image.get_rect()        
-        image.set_colorkey(Constants.YELLOW)
+        image.set_colorkey(Constants.WHITE)
         self.rect.y = self.y
         self.rect.x = self.x
 
     def update(self):
         
         
+        self.calc_grav()
         self.rect.y += self.change_y
         self.rect.x += self.change_x
         pos = self.rect.x 
@@ -828,18 +727,14 @@ class Player(pygame.sprite.Sprite):
         if self.direction == "R" and self.change_y != 1:
             frame = (pos // 20) % len(self.walking_frames_r)
             self.image = self.walking_frames_r[frame]
-        elif self.direction == "U":
-            frame = self.walking_frames_u[0]
+        elif self.direction == "S":
+            frame = self.walking_frames_s[0]
 
         elif self.direction == "L" and self.change_y != 1:
             frame = (pos // 20) % len(self.walking_frames_l)
             self.image = self.walking_frames_l[frame]
-        if self.grav == True:
-            self.calc_grav()
         
-        if self.rect.y == 0:
-            self.rect.y = 0
-            self.change_y = 1
+        
                
         block_hit_list = pygame.sprite.spritecollide(self, self.list, False)
         for block in block_hit_list:
@@ -849,9 +744,9 @@ class Player(pygame.sprite.Sprite):
             elif self.change_y < 1:
                 self.rect.top = block.rect.bottom
             
- 
             # Stop our vertical movement
             self.change_y = 0
+            
         block_hit_list = pygame.sprite.spritecollide(self, self.spike_list, False)
         for block in block_hit_list:
             
@@ -872,37 +767,26 @@ class Player(pygame.sprite.Sprite):
               
     def calc_grav(self):    
         
-        if self.rect.y <= 655:
-            if self.change_y == 0:
-                self.change_y += 1
-            else:
-                self.change_y += .45
+        
+        self.change_y += .002
                 
-            if self.rect.y <= self.height - 96 and self.change_y == 0:
-                self.rect.y = self.height - 95  
-        else:
-            None 
+         
 
     def go_right(self):
-        self.change_x = 3
+        self.change_x = 5
         self.direction = "R"
     def stop(self):
         self.change_x = 0
         if self.direction == "R":
-            self.image = self.walking_frames_r[0]
+            self.image = self.walking_frames_s[0]
         elif self.direction == "L":
-            self.image = self.walking_frames_l[0]
+            self.image = self.walking_frames_s[0]
  
      
     def go_left(self):
-        self.change_x -= 3
+        self.change_x -= 5
         self.direction = "L"
-    def jump(self):
-        
-        if self.rect.y >= 70:
-            self.change_y = -13
-        else:
-            self.change_y = 5
+    
     def reset(self):
         self.rect.x = self.start_x
         self.rect.y = self.start_y
