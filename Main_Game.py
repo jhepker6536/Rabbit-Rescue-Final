@@ -57,10 +57,8 @@ def Rabbit_Rescue():
     font = pygame.font.SysFont('Calibri', 70, True, False)
     text1 = pygame.image.load('PlayGameButton.png')
     text2 = pygame.image.load('Settingsbutton.png')
-    text3 = pygame.image.load('Loadscreen.png')
     text1.set_colorkey(WHITE)
     text2.set_colorkey(WHITE)
-    text3.set_colorkey(WHITE)
     
     text6 = font.render("<-BACK", True, RED)
     text7 = font2.render("DIFFICULTY", True, RED)

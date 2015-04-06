@@ -1,6 +1,6 @@
 import pygame 
 
-from Player import Spikes, Player,Key,Caged_Bunny,Snake, Player_faller
+from Player import Spikes, Player,Key,Caged_Bunny,Snake
 import Constants
 from Platforms import Platform
 
