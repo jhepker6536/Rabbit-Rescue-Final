@@ -49,9 +49,9 @@ def level_four(color):
     platform2 = Platform(935,300,3)
     platform3 = Platform(1400,630,3)
     platform6 = Platform(2200,630,3)
-    platform7 = Platform(2800, 420,3)
+    platform7 = Platform(2800, 460,3)
     player = Player(25,400,platform_list,True,player_color, hight,spike_list=())
-    caged_bunny = Caged_Bunny(3070,274,platform_list) 
+    caged_bunny = Caged_Bunny(3070,314,platform_list) 
     key = Key(key_x,key_y,player.change_x)
     
     #snake limits
@@ -143,8 +143,8 @@ def level_four(color):
         for block in block_hit_list:
             key.move_key()
             key_collected = True
-        if player.rect.y >= 768:
-            Constants.game_over = True   
+            
+           
           
         block_hit_list = pygame.sprite.spritecollide(player, caged_bunny_list, False)
         for block in block_hit_list:
@@ -181,11 +181,15 @@ def level_four(color):
         active_sprite_list.draw(screen) 
         screen.blit(sound_button,[12,700])
         screen.blit(text11, [1200,710])
+        
         if Constants.game_over == True:
             screen.blit(game_over_image,[0,0])  
-        if caged_bunny.image_num == 2 and player.rect.x == 3100:
+            
+        if  caged_bunny.image_num == 2 and player.rect.y >= 738:
             Constants.level = 5 
             break   
+        if key_collected == False and player.rect.y >= 738:
+            Constants.game_over = True
         pygame.display.flip()
         clock.tick(60)
         

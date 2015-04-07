@@ -159,4 +159,4 @@ def level_five(color):
         clock.tick(60)
 
 if __name__ == "__main__":
-    level_five("Blue")
+    level_five("Green")

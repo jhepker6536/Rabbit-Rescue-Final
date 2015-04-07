@@ -6,6 +6,7 @@ from Level_1 import level_one
 from Level_2 import level_two
 from Level_3 import level_three
 from Level_4 import level_four
+from Level_5 import level_five
 import Constants
  
 
@@ -84,7 +85,7 @@ def Rabbit_Rescue():
  
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
-    Constants.level = 1
+    Constants.level = 4
     # What screen we see and background
     background_image = pygame.image.load("Field.png")
     background_image2 = pygame.image.load("Field_old_look.png")
@@ -166,6 +167,11 @@ def Rabbit_Rescue():
                             Key.key_move_x = 0
                             Platform.platform_move_y = 0
                             level_four(color)
+                        while(Constants.level == 5) and Constants.game_over == False: 
+                            Caged_Bunny.Cage_move_x = 0 
+                            
+                            Platform.platform_move_y = 0
+                            level_five(color)
                     elif mouse_x >= 398 and mouse_x <= 889 and mouse_y >= 450 and mouse_y <= 541:
                         print("and again setting")
                         screen_view = 4
