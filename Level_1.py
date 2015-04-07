@@ -48,7 +48,7 @@ def level_one(color):
     platform1 = Platform(400,450,1)
     platform2 = Platform(925,250,1)
     platform3 = Platform(1600,430,1)
-    platform6 = Platform(2400,250,1)
+    platform6 = Platform(2300,270,1)
     bird = Bird(900,200)
     
     player = Player(25,400,platform_list,True,player_color, hight,spike_list=())
@@ -65,7 +65,7 @@ def level_one(color):
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
     platform_list.add(platform_test, platform2, platform1,platform3,platform6)
-    active_sprite_list.add(bird,caged_bunny,player,platform_test,platform2,platform1,platform3,platform6,key)
+    active_sprite_list.add(caged_bunny,player,platform_test,platform2,platform1,platform3,platform6,key)
     
     background_x_change = 0
     pygame.mixer.music.load("BoxCat_Games_-_10_-_Epic_Song.wav")

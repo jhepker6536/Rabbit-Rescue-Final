@@ -84,7 +84,7 @@ def Rabbit_Rescue():
  
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
-    Constants.level = 3
+    Constants.level = 1
     # What screen we see and background
     background_image = pygame.image.load("Field.png")
     background_image2 = pygame.image.load("Field_old_look.png")
