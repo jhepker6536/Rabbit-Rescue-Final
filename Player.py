@@ -5,6 +5,39 @@ import random
 import Player
 #Player Colors
 
+
+class Missle(pygame.sprite.Sprite):
+    missle = []
+    missle_move_y = -3
+    direction = "U"
+    def __init__(self,speed):
+        
+        self.speed = speed
+        self.change_y = self.speed 
+        
+        
+        super().__init__()
+ 
+        sprite_sheet = SpriteSheet("Caged Bunnies.png")
+        image = sprite_sheet.get_image(870, 879, 78, 413)
+        image.set_colorkey(Constants.WHITE)
+        self.missle.append(image)
+        
+        
+        self.image = self.missle[0]
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randrange(25,1000)
+        self.rect.y = 800
+    def update(self): 
+        self.rect.y += self.change_y
+        pos = self.rect.x 
+        
+        if self.direction == "R":
+            frame = (pos // 20) % len(self.missle)
+            self.image = self.missle[frame]
+    def reset(self):
+        self.rect.x = random.randrange(25,1000)
+        self.rect.y = 800
 class Bird(pygame.sprite.Sprite):
     bird = []
     bird_move_x = -3
@@ -674,7 +707,7 @@ class Player_Falling(pygame.sprite.Sprite):
    
     brown_bunny = ([1509,258,167,225],[1680,260,167,224],[1850,258,174,215])
     black_bunny = ([1500,711,175,225],[1684,709,166,226],[1850,707,164,221])
-    green_bunny = ([1500,1379,170,226],[1684,1380,171,225],[1861,1379,173,220])
+    green_bunny = ([1500,1379,170,226],[1684,1381,171,225],[1861,1379,173,220])
     blue_bunny = ([1500,40,172,216],[1672,38,170,222],[1842,36,174,219])
     purple_bunny =([1500,1163,173,217],[1679,1159,171,221],[1859,1159,165,216])
     white_bunny = ([1510,489,171,221],[1680,488,172,223],[1851,488,167,216])

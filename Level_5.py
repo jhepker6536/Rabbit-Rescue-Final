@@ -1,10 +1,8 @@
 import pygame 
-from Player import Player_Falling, Bird
 
-
+from Player import Player_Falling, Bird,Missle
 import Constants
 from Platforms import Platform 
-
 
 width = 1366
 hight = 768
@@ -15,13 +13,21 @@ def level_five(color):
     screen = pygame.display.set_mode([width,hight], pygame.FULLSCREEN, 32)
     mouse_x = 0
     mouse_y = 0 
-    bird_list = pygame.sprite.Group()
-    floor_x = 0  
-    active_sprite_list = pygame.sprite.Group()
+    floor_x = 0 
     
+    bird_list = pygame.sprite.Group() 
+    active_sprite_list = pygame.sprite.Group()
     spike_list =[]
     list_platform = []
     
+    missle_speed = -3 
+    if Constants.difficulty == "Easy":
+        missle_speed = -3
+    elif Constants.difficulty == "Medium":
+        missle_speed = -5
+    else:
+        missle_speed = -8
+
     if color == "Blue":
         player_color = Player_Falling.blue_bunny
     elif color == "Brown":
@@ -42,8 +48,9 @@ def level_five(color):
         
     
     player = Player_Falling(200,10,list_platform,True,player_color,hight,spike_list)
+    missle = Missle(missle_speed)
     bird1 = Bird(1000,300)
-    active_sprite_list.add(player,bird1)
+    active_sprite_list.add(player,bird1,missle)
     bird_list.add(bird1)
     
     background_y_change = 0 
@@ -142,7 +149,8 @@ def level_five(color):
         
         if player.rect.y >= 768:
             break
-            
+        if missle.rect.y == -417:
+            missle.reset()   
         background_y = background_y + background_y_change 
         
         if player.rect.x == width:
