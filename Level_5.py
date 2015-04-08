@@ -1,6 +1,6 @@
 import pygame 
 
-from Player import Player_Falling, Bird,Missle
+from Player import Player_Falling,Missle, Snake_king
 import Constants
 from Platforms import Platform 
 
@@ -11,22 +11,26 @@ hight = 768
 def level_five(color):
     pygame.init()
     screen = pygame.display.set_mode([width,hight], pygame.FULLSCREEN, 32)
+    snake_x = 475
+    snake_y = 8532 
     mouse_x = 0
-    mouse_y = 0 
+    mouse_y = 0
     floor_x = 0 
     
-    bird_list = pygame.sprite.Group() 
+    missle_list = pygame.sprite.Group() 
     active_sprite_list = pygame.sprite.Group()
-    spike_list =[]
+    snake_list =pygame.sprite.Group()
+    spike_list = []
     list_platform = []
+    
     
     missle_speed = -3 
     if Constants.difficulty == "Easy":
-        missle_speed = -3
-    elif Constants.difficulty == "Medium":
-        missle_speed = -5
-    else:
         missle_speed = -8
+    elif Constants.difficulty == "Medium":
+        missle_speed = -12
+    else:
+        missle_speed = -18
 
     if color == "Blue":
         player_color = Player_Falling.blue_bunny
@@ -49,9 +53,11 @@ def level_five(color):
     
     player = Player_Falling(200,10,list_platform,True,player_color,hight,spike_list)
     missle = Missle(missle_speed)
-    bird1 = Bird(1000,300)
-    active_sprite_list.add(player,bird1,missle)
-    bird_list.add(bird1)
+    snake_king = Snake_king(snake_x,snake_y)
+    
+    active_sprite_list.add(player,missle,snake_king)
+    missle_list.add(missle)
+    snake_list.add(snake_king)
     
     background_y_change = 0 
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
@@ -108,7 +114,8 @@ def level_five(color):
                     Constants.game_over = False
                     screen.blit(background_image,[0, background_y])
                     player.reset()
-                    bird1.reset()
+                    missle.reset()
+                    snake_king.reset()
                     background_y = 0
                     
                 elif mouse_x >= 12 and mouse_x <= 97 and mouse_y >= 675 and mouse_y <= 775:
@@ -124,7 +131,7 @@ def level_five(color):
 
             
                                     
-            
+        print(snake_king.rect.y)   
         screen.fill(Constants.WHITE)
         screen.blit(background_image, [0, background_y])
         player.rect.y += .5
@@ -138,27 +145,31 @@ def level_five(color):
         pos = pygame.mouse.get_pos()
         if background_y > -8000:
             background_y -= 12
+            snake_king.change_y -= 12
+        else:
+            missle.rect.x = 3000
         if floor_x > 0:
             floor_x = -7
         mouse_x = pos[0]
         mouse_y = pos[1]    
             
-        block_hit_list = pygame.sprite.spritecollide(player, bird_list, False)
+        block_hit_list = pygame.sprite.spritecollide(player,missle_list, False)
+        for block in block_hit_list:
+            Constants.game_over = True
+            
+        block_hit_list = pygame.sprite.spritecollide(player,snake_list, False)
         for block in block_hit_list:
             Constants.game_over = True
         
         if player.rect.y >= 768:
-            break
-        if missle.rect.y == -417:
+            Constants.game_over = True
+        if missle.rect.y <= -417:
             missle.reset()   
         background_y = background_y + background_y_change 
         
-        if player.rect.x == width:
-            Platform.platform_move_x += 3
         active_sprite_list.update()
         active_sprite_list.draw(screen)
         
-          
         if Constants.game_over == True:
             screen.blit(game_over_image,[0,0])    
                

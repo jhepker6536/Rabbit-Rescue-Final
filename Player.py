@@ -2,10 +2,37 @@ import pygame
 from Spritesheet import SpriteSheet
 import Constants
 import random 
-import Player
+
 #Player Colors
 
-
+class Snake_king(pygame.sprite.Sprite):
+    king = []
+    change_y = 0
+    direction = "U"
+    def __init__(self,x,y):
+        self.start_x = x
+        self.start_y = y
+        self.x = x
+        self.y = y
+        
+        super().__init__()
+ 
+        sprite_sheet = SpriteSheet("Caged Bunnies.png")
+        image = sprite_sheet.get_image(1120, 954, 181, 177)
+        image.set_colorkey(Constants.WHITE)
+        self.king.append(image)
+        
+        self.image = self.king[0]
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+    def update(self):
+        self.rect.y = self.y + self.change_y
+    def reset(self):
+        self.rect.x = self.start_x
+        self.rect.y = self.start_y
+    
+        
 class Missle(pygame.sprite.Sprite):
     missle = []
     missle_move_y = -3
@@ -37,7 +64,7 @@ class Missle(pygame.sprite.Sprite):
             self.image = self.missle[frame]
     def reset(self):
         self.rect.x = random.randrange(25,1000)
-        self.rect.y = 800
+        self.rect.y = 1000
 class Bird(pygame.sprite.Sprite):
     bird = []
     bird_move_x = -3
@@ -806,7 +833,7 @@ class Player_Falling(pygame.sprite.Sprite):
          
 
     def go_right(self):
-        self.change_x = 5
+        self.change_x = 7
         self.direction = "R"
     def stop(self):
         self.change_x = 0
@@ -817,7 +844,7 @@ class Player_Falling(pygame.sprite.Sprite):
  
      
     def go_left(self):
-        self.change_x -= 5
+        self.change_x -= 7
         self.direction = "L"
     
     def reset(self):

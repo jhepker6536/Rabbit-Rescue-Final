@@ -19,6 +19,6 @@ GRASS_300 = (0, 55, 300, 40)
 GRASS_400 = (41, 113, 400, 40)
 game_over = False
 level = 1 
-difficulty = "easy" 
+difficulty = "Easy" 
 width = 1366
 hight = 768

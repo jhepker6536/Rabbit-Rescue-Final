@@ -172,6 +172,8 @@ def Rabbit_Rescue():
                             
                             Platform.platform_move_y = 0
                             level_five(color)
+                        while(Constants.level == 5) and Constants.game_over == False:
+                            you_win()
                     elif mouse_x >= 398 and mouse_x <= 889 and mouse_y >= 450 and mouse_y <= 541:
                         print("and again setting")
                         screen_view = 4
