@@ -16,7 +16,7 @@ def level_five(color):
     mouse_x = 0
     mouse_y = 0
     floor_x = 0 
-    
+    control = True
     missle_list = pygame.sprite.Group() 
     active_sprite_list = pygame.sprite.Group()
     snake_list =pygame.sprite.Group()
@@ -26,9 +26,9 @@ def level_five(color):
     
     missle_speed = -3 
     if Constants.difficulty == "Easy":
-        missle_speed = -8
+        missle_speed = -14
     elif Constants.difficulty == "Medium":
-        missle_speed = -12
+        missle_speed = -17
     else:
         missle_speed = -18
 
@@ -69,7 +69,8 @@ def level_five(color):
     play_counter = 0
     pygame.mixer.music.load("BoxCat_Games_-_10_-_Epic_Song.wav")
     pygame.mixer.music.play(-1,0.0)
-    
+    frame_count = 0
+    frame_rate = 60 
     clock = pygame.time.Clock()
     done = False
     
@@ -80,53 +81,54 @@ def level_five(color):
     while not done:
     
         for event in pygame.event.get():
-            
-            if event.type == pygame.KEYDOWN:
-                
-                if event.key == pygame.K_LEFT:
-                    player.go_left()
+            if control == True:
+                if event.type == pygame.KEYDOWN:
                     
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if mouse_x >= 600:
-                        done = True
-                elif event.key == pygame.K_RIGHT:
-                    player.go_right()
-                     
-                    
+                    if event.key == pygame.K_LEFT:
+                        player.go_left()
                         
-            elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT and player.change_x < 0:
-                    player.stop()
-                    player.direction = "S"
-                    background_y_change = 0 
-                elif event.key == pygame.K_RIGHT:
-                    player.stop()
-                    player.direction = "S"
-                    background_y_change = 0 
-                elif event.type == pygame.QUIT:
-                    done = True 
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 649 and mouse_y <= 778:
-                    done = True
-                    raise SystemExit
-                if mouse_x >= 598 and mouse_x <= 1100 and mouse_y >= 400 and mouse_y <= 460:
-                    print("hit")
-                    Constants.game_over = False
-                    screen.blit(background_image,[0, background_y])
-                    player.reset()
-                    missle.reset()
-                    snake_king.reset()
-                    background_y = 0
-                    
-                elif mouse_x >= 12 and mouse_x <= 97 and mouse_y >= 675 and mouse_y <= 775:
-                        play_counter += 1 
-                        if play_counter % 2 != 0:
-                            pygame.mixer.music.pause()
-                            sound_button = unmute_button
-                        else:
-                            pygame.mixer.music.play()
-                            sound_button = mute_button    
-                    
+                    elif event.type == pygame.MOUSEBUTTONDOWN:
+                        if mouse_x >= 600:
+                            done = True
+                    elif event.key == pygame.K_RIGHT:
+                        player.go_right()
+                         
+                        
+                            
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_LEFT and player.change_x < 0:
+                        player.stop()
+                        player.direction = "S"
+                        background_y_change = 0 
+                    elif event.key == pygame.K_RIGHT:
+                        player.stop()
+                        player.direction = "S"
+                        background_y_change = 0 
+                    elif event.type == pygame.QUIT:
+                        done = True 
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 649 and mouse_y <= 778:
+                        done = True
+                        raise SystemExit
+                    if mouse_x >= 598 and mouse_x <= 1100 and mouse_y >= 400 and mouse_y <= 460:
+                        print("hit")
+                        Constants.game_over = False
+                        screen.blit(background_image,[0, background_y])
+                        player.reset()
+                        missle.reset()
+                        snake_king.reset()
+                        background_y = 0
+                        player.gravity = False
+                        
+                    elif mouse_x >= 12 and mouse_x <= 97 and mouse_y >= 675 and mouse_y <= 775:
+                            play_counter += 1 
+                            if play_counter % 2 != 0:
+                                pygame.mixer.music.pause()
+                                sound_button = unmute_button
+                            else:
+                                pygame.mixer.music.play()
+                                sound_button = mute_button    
+                        
                     
 
             
@@ -134,32 +136,44 @@ def level_five(color):
         print(snake_king.rect.y)   
         screen.fill(Constants.WHITE)
         screen.blit(background_image, [0, background_y])
-        player.rect.y += .5
+        
         
         if player.rect.x <=0:
             player.rect.x = 0
-        elif player.rect.x >= width - 50:
-            player.rect.x = width - 50
+        elif player.rect.x >= width - 100:
+            player.rect.x = width - 100
         #quit
         screen.blit(text11, [1200,650])    
         pos = pygame.mouse.get_pos()
+        
         if background_y > -8000:
-            background_y -= 12
-            snake_king.change_y -= 12
+            background_y -= 13
+            snake_king.change_y -= 13
         else:
             missle.rect.x = 3000
+            player.change_x = 0
+            control = False
+            player.rect.x = 400
+            player.change_y = 3
+            player.change_x = 1
+            
+            
         if floor_x > 0:
             floor_x = -7
+            
         mouse_x = pos[0]
         mouse_y = pos[1]    
             
         block_hit_list = pygame.sprite.spritecollide(player,missle_list, False)
         for block in block_hit_list:
+            snake_king.change_y = 0
             Constants.game_over = True
             
         block_hit_list = pygame.sprite.spritecollide(player,snake_list, False)
         for block in block_hit_list:
-            Constants.game_over = True
+            snake_king.die()
+            
+        
         
         if player.rect.y >= 768:
             Constants.game_over = True

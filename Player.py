@@ -18,7 +18,10 @@ class Snake_king(pygame.sprite.Sprite):
         super().__init__()
  
         sprite_sheet = SpriteSheet("Caged Bunnies.png")
-        image = sprite_sheet.get_image(1120, 954, 181, 177)
+        image = sprite_sheet.get_image(659, 1395,763, 173)
+        image.set_colorkey(Constants.WHITE)
+        self.king.append(image)
+        image = sprite_sheet.get_image(595, 1561, 831, 173)
         image.set_colorkey(Constants.WHITE)
         self.king.append(image)
         
@@ -29,8 +32,9 @@ class Snake_king(pygame.sprite.Sprite):
     def update(self):
         self.rect.y = self.y + self.change_y
     def reset(self):
-        self.rect.x = self.start_x
-        self.rect.y = self.start_y
+        self.change_y = 0
+    def die(self):
+        self.image = self.king[1]
     
         
 class Missle(pygame.sprite.Sprite):
@@ -75,7 +79,7 @@ class Bird(pygame.sprite.Sprite):
         self.y = y
         self.start_x = x
         self.start_y = y
-        self.change_x = -3
+        self.change_x = 0
         self.change_y = 0
         
         super().__init__()
@@ -731,7 +735,7 @@ class Player_Falling(pygame.sprite.Sprite):
     walking_frames_l = []
     walking_frames_r = []
     walking_frames_s = []
-   
+    gravity = False
     brown_bunny = ([1509,258,167,225],[1680,260,167,224],[1850,258,174,215])
     black_bunny = ([1500,711,175,225],[1684,709,166,226],[1850,707,164,221])
     green_bunny = ([1500,1379,170,226],[1684,1381,171,225],[1861,1379,173,220])
@@ -778,8 +782,6 @@ class Player_Falling(pygame.sprite.Sprite):
 
     def update(self):
         
-        
-        self.calc_grav()
         self.rect.y += self.change_y
         self.rect.x += self.change_x
         pos = self.rect.x 
@@ -809,10 +811,7 @@ class Player_Falling(pygame.sprite.Sprite):
             
         block_hit_list = pygame.sprite.spritecollide(self, self.spike_list, False)
         for block in block_hit_list:
-            
             self.change_x = 0
-           
- 
             # Stop our vertical movement
             self.change_y = 0
             
