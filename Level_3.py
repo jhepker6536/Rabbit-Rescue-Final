@@ -106,7 +106,7 @@ def level_three(color):
     done = False
     
     background_image = pygame.image.load("SkyLevel.png")
-    game_over_image = pygame.image.load("game over.png")
+    game_over_image = pygame.image.load("game over_falling.png")
     background_y = -8030
     
     while not done:
@@ -228,6 +228,7 @@ def level_three(color):
          
         if player2.rect.y >= 768:
             Constants.game_over = True
+            
             
                
             

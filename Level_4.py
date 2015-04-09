@@ -71,7 +71,7 @@ def level_four(color):
     pygame.mixer.music.play()
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
     text11 = font2.render("Exit",True,Constants.RED)
-    game_over_image = pygame.image.load("game over.png")
+    game_over_image = pygame.image.load("game over_falling.png")
     
     clock = pygame.time.Clock()
     done = False
@@ -144,7 +144,7 @@ def level_four(color):
             key.move_key()
             key_collected = True
             
-           
+          
           
         block_hit_list = pygame.sprite.spritecollide(player, caged_bunny_list, False)
         for block in block_hit_list:
@@ -182,14 +182,17 @@ def level_four(color):
         screen.blit(sound_button,[12,700])
         screen.blit(text11, [1200,710])
         
+        if key_collected == False and player.rect.y >= 738:
+            Constants.game_over = True
+            
+        
         if Constants.game_over == True:
             screen.blit(game_over_image,[0,0])  
             
         if  caged_bunny.image_num == 2 and player.rect.y >= 738:
             Constants.level = 5 
             break   
-        if key_collected == False and player.rect.y >= 738:
-            Constants.game_over = True
+        
         pygame.display.flip()
         clock.tick(60)
         

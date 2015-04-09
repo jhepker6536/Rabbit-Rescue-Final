@@ -16,6 +16,7 @@ def level_five(color):
     mouse_x = 0
     mouse_y = 0
     floor_x = 0 
+    game_won = False
     control = True
     missle_list = pygame.sprite.Group() 
     active_sprite_list = pygame.sprite.Group()
@@ -73,9 +74,9 @@ def level_five(color):
     frame_rate = 60 
     clock = pygame.time.Clock()
     done = False
-    
+    endscreen = pygame.image.load("Endscreen.png")
     background_image = pygame.image.load("SkyLevel.png")
-    game_over_image = pygame.image.load("game over_bird.png")
+    game_over_image = pygame.image.load("game over_bomb.png")
     background_y = 0
     
     while not done:
@@ -147,8 +148,8 @@ def level_five(color):
         pos = pygame.mouse.get_pos()
         
         if background_y > -8000:
-            background_y -= 13
-            snake_king.change_y -= 13
+            background_y -= 8
+            snake_king.change_y -= 8
         else:
             missle.rect.x = 3000
             player.change_x = 0
@@ -169,28 +170,40 @@ def level_five(color):
             snake_king.change_y = 0
             Constants.game_over = True
             
-        block_hit_list = pygame.sprite.spritecollide(player,snake_list, False)
-        for block in block_hit_list:
-            snake_king.die()
-            player.change_y = 0 
-            
         
         
-        if player.rect.y >= 768:
-            Constants.game_over = True
+        
+        
         if missle.rect.y <= -417:
             missle.reset()   
         background_y = background_y + background_y_change 
         
-        active_sprite_list.update()
-        active_sprite_list.draw(screen)
-        
-        if Constants.game_over == True:
-            screen.blit(game_over_image,[0,0])    
+        if game_won == False:
+            active_sprite_list.update()
+            active_sprite_list.draw(screen)
+        elif game_won == True:
+            active_sprite_list.remove() 
+ 
+        block_hit_list = pygame.sprite.spritecollide(player,snake_list, False)
+        for block in block_hit_list:
+            snake_king.die()
+            player.change_y = 0 
+            total_seconds = frame_count // frame_rate
+            seconds = total_seconds % 60
+            frame_count += 1 
+            if seconds >= 2:
+                game_won = True
+                Constants.game_over = True
+                
+            
+        if Constants.game_over == True and game_won == False:
+            screen.blit(game_over_image,[0,0])  
+        if Constants.game_over == True and game_won == True:
+            screen.blit(endscreen, [0,0])
                
         screen.blit(sound_button,[12,700])
         pygame.display.flip()
         clock.tick(60)
 
 if __name__ == "__main__":
-    level_five("Green")
+    level_five("Blue")

@@ -85,7 +85,7 @@ def Rabbit_Rescue():
  
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
-    Constants.level = 5
+    Constants.level = 4
     # What screen we see and background
     background_image = pygame.image.load("Field.png")
     background_image2 = pygame.image.load("Field_old_look.png")
@@ -172,8 +172,6 @@ def Rabbit_Rescue():
                             
                             Platform.platform_move_y = 0
                             level_five(color)
-                        while(Constants.level == 5) and Constants.game_over == False:
-                            You_win()
                     elif mouse_x >= 398 and mouse_x <= 889 and mouse_y >= 450 and mouse_y <= 541:
                         print("and again setting")
                         screen_view = 4
