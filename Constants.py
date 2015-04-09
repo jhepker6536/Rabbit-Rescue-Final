@@ -17,8 +17,12 @@ CLOUD_100 = (104 ,0, 158, 49)
 GRASS_200 = (269, 0, 200, 40)
 GRASS_300 = (0, 55, 300, 40)
 GRASS_400 = (41, 113, 400, 40)
+#Is the game over
 game_over = False
+#What level are we on 
 level = 1 
+#What is the difficulty 
 difficulty = "Easy" 
+#Screen size
 width = 1366
 hight = 768

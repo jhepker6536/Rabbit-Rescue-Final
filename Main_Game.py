@@ -1,3 +1,4 @@
+# Imports 
 import pygame 
 import random 
 from Player import Caged_Bunny,Key, Not_Moving_Bunny,Animated_Player
@@ -10,47 +11,35 @@ from Level_5 import level_five
 import Constants
  
 
-# Define some colors 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-BLUE = (16, 81, 148)
-PURPLE = (163, 73, 164)
-YELLOW = (255, 242, 0)
-GREEN = (34, 177, 76)
 # Screen Size and creation
 width = 1366
 hight = 768
 screen = pygame.display.set_mode((width, hight), pygame.FULLSCREEN, 32)
-
-# Button Rectangle class
- 
-
+#Main Game Function 
 def Rabbit_Rescue():
     """ Main function for the game. """
     pygame.init()   
-    # Random Variables
-    
-    
-   
+    #Music
     pygame.mixer.music.load("BoxCat_Games_-_25_-_Victory.wav")
-    pygame.mixer.music.play(1)   
-    # Ad sprites to list 
+    pygame.mixer.music.play(1)  
     
+    #Sprit Lists  
+    active_sprite_list = pygame.sprite.Group()
     sitting_bunny_list = pygame.sprite.Group()
+    #Stationary Bunnies for settings screen
     Brown_Bunny = Not_Moving_Bunny(0,100,200)
     Black_Bunny = Not_Moving_Bunny(1,300,200)
     Green_Bunny = Not_Moving_Bunny(2,500,200)
     Blue_Bunny = Not_Moving_Bunny(3,100,400)
     Purple_Bunny = Not_Moving_Bunny(4,300,400)
-
     
+    #Created objects from Classes 
     running_bunny = Animated_Player(Animated_Player.bunny_list[random.randrange(0, 4)], width,False)
     running_bunny2 = Animated_Player(Animated_Player.bunny_list[random.randrange(0, 4)], width,False)
     running_bunny3 = Animated_Player(Animated_Player.bunny_list[random.randrange(0, 4)], width,True)
     running_bunny4 = Animated_Player(Animated_Player.bunny_list[random.randrange(0, 4)], width,True)
-    active_sprite_list = pygame.sprite.Group()
+    
+    #Add objects to sprite lists
     active_sprite_list.add(running_bunny,running_bunny2,running_bunny3,running_bunny4) 
     
     # All blitted Text
@@ -58,47 +47,47 @@ def Rabbit_Rescue():
     font = pygame.font.SysFont('Calibri', 70, True, False)
     text1 = pygame.image.load('PlayGameButton.png')
     text2 = pygame.image.load('Settingsbutton.png')
-    text1.set_colorkey(WHITE)
-    text2.set_colorkey(WHITE)
-    
-    text6 = font.render("<-BACK", True, RED)
-    text7 = font2.render("DIFFICULTY", True, RED)
-    text11 = font2.render("Exit", True, RED)
-    COLOR4 = RED
-    COLOR5 = RED
-    COLOR6 = RED   
+    text1.set_colorkey(Constants.WHITE)
+    text2.set_colorkey(Constants.WHITE)
+    text6 = font.render("<-BACK", True, Constants.RED)
+    text7 = font2.render("DIFFICULTY", True, Constants.RED)
+    text11 = font2.render("Exit", True, Constants.RED)
+    COLOR4 = Constants.RED
+    COLOR5 = Constants.RED
+    COLOR6 = Constants.RED   
    
-    # cursor picture
-    
-    pygame.mouse.set_visible(True)
     
     # load logo screen
     logo = pygame.image.load('LOADER.png')
     title = pygame.image.load('title_logo.png')
-    title.set_colorkey(WHITE)
-    # Creat instance of button rectangles 
+    title.set_colorkey(Constants.WHITE) 
     
- 
     # Loop until the user clicks the close button.
     done = False
     really_done = False
  
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
-    Constants.level = 3
+    
     # What screen we see and background
     background_image = pygame.image.load("Field.png")
     background_image2 = pygame.image.load("Field_old_look.png")
     color_picker = pygame.image.load('Bunny_Chooser.png')
     color_picker.set_colorkey(Constants.YELLOW)
     screen_view = 0
-    font = pygame.font.Font(None, 25)
     frame_count = 0
     frame_rate = 60 
+    
+    #Rabbit Box x & y for rabbit chooser settings screen
     r_box_x = 330
     r_box_y = 300
+    
+    #In game variables
+    Constants.level = 1
     difficulty = "easy"
-    color = "Black"
+    color = "Green"
+    
+    
     # Parent while loop
     while not really_done:
         Constants.difficulty = difficulty
@@ -111,7 +100,7 @@ def Rabbit_Rescue():
                     really_done = True  
                     
             # Background logo
-            screen.fill(BLACK)
+            screen.fill(Constants.BLACK)
             screen.blit(logo, [0, 0])
             
             # count
@@ -141,26 +130,27 @@ def Rabbit_Rescue():
                 elif event.type == pygame.MOUSEBUTTONDOWN:                   
                     if mouse_x >= 399 and mouse_x <= 917 and mouse_y >= 325 and mouse_y <= 416:
                         print("game")
-                         
+                        #WHILE LOOPS THAT CREAT THE LEVELS 
+                        #LEVEL ONE
                         while (Constants.level == 1) and Constants.game_over == False:
                             level_one(color)
                            
                             print(Constants.game_over)
-                            
+                        #LEVEL TWO   
                         while (Constants.level == 2) and Constants.game_over == False:
                             Platform.platform_move_x = 0 
                             Caged_Bunny.Cage_move_x = 0 
                             Key.key_move_x = 0 
                             print(Constants.game_over)
                             level_two(color)  
-                           
-                            
+                        #LEVEL THREE  
                         while (Constants.level == 3) and Constants.game_over == False:
                             Platform.platform_move_x = 0 
                             Caged_Bunny.Cage_move_x = 0 
                             Key.key_move_x = 0 
                             print(Constants.game_over)
                             level_three(color)
+                        #LEVEL FOUR
                         while(Constants.level == 4) and Constants.game_over == False:
                             Platform.platform_move_x = 0 
                             Caged_Bunny.Cage_move_x = 0
@@ -168,18 +158,19 @@ def Rabbit_Rescue():
                             Key.key_move_x = 0
                             Platform.platform_move_y = 0
                             level_four(color)
+                        #LEVEL fIVE
                         while(Constants.level == 5) and Constants.game_over == False: 
                             Caged_Bunny.Cage_move_x = 0 
-                            
                             Platform.platform_move_y = 0
                             level_five(color)
+                    # DO THEY HIT THE SETTINGS BUTTON?        
                     elif mouse_x >= 398 and mouse_x <= 889 and mouse_y >= 450 and mouse_y <= 541:
                         print("and again setting")
                         screen_view = 4
+                    #quit button
                     elif mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 649 and mouse_y <= 778:
                         done = True
                         really_done = True                     
-                # Do they let off the mouse button change mouse
                    
                     
             # Background
@@ -273,32 +264,34 @@ def Rabbit_Rescue():
                        
                                       
                     # Background
-                    screen.fill(BLACK)
+                    screen.fill(Constants.BLACK)
+                    screen.blit(background_image2, [0, 0])
                     total_seconds = frame_count // frame_rate
                     seconds = total_seconds % 60
-                    
+                    #difficulty chooser 
                     if difficulty == "easy":
-                        COLOR4 = WHITE
-                        COLOR5 = RED
-                        COLOR6 = RED
+                        COLOR4 = Constants.WHITE
+                        COLOR5 = Constants.RED
+                        COLOR6 = Constants.RED
                     elif difficulty == "medium":
-                        COLOR5 = WHITE
-                        COLOR4 = RED
-                        COLOR6 = RED
+                        COLOR5 = Constants.WHITE
+                        COLOR4 = Constants.RED
+                        COLOR6 = Constants.RED
                     else:
-                        COLOR6 = WHITE
-                        COLOR4 = RED
-                        COLOR5 = RED
+                        COLOR6 = Constants.WHITE
+                        COLOR4 = Constants.RED
+                        COLOR5 = Constants.RED
                     frame_count += 1                   
-                    # Creat Buttons
+                    # Creat Buttons for bunny chooser
                     sitting_bunny_list.draw(screen)
                     
-                    screen.blit(background_image2, [0, 0])
+                    
+                    #button s for difficulty 
                     screen.blit(color_picker, [200,300])                    
                     text8 = font2.render("EASY", True, COLOR4)
                     text9 = font2.render("MEDIUM", True, COLOR5)
                     text10 = font2.render("HARD", True, COLOR6) 
-                    text12 = font2.render("Pick Your Rabbit", True, RED)                   
+                    text12 = font2.render("Pick Your Rabbit", True, Constants.RED)                   
                     screen.blit(text6, [100, 650])
                     screen.blit(text7, [900, 200])
                     screen.blit(text8, [800, 260])
@@ -306,8 +299,10 @@ def Rabbit_Rescue():
                     screen.blit(text10, [1150, 260])
                     screen.blit(text11, [1200, 650])
                     screen.blit(text12, [300, 200])
-                    # Change mouse
+                   
+                    #box around bunny that is choosen 
                     pygame.draw.rect(screen, Constants.WHITE, [r_box_x, r_box_y, 100,95],3)
+                    # Change mouse
                     pos = pygame.mouse.get_pos()
                     mouse_x = pos[0]
                     mouse_y = pos[1] 

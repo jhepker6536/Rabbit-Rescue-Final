@@ -1,25 +1,25 @@
+#Imports 
 import pygame 
 from Player import Player, Key, Caged_Bunny
 import Constants
 from Platforms import Platform
-
-
- 
+#size variables for screen
 width = 1366
 hight = 768
-
-
+#Level four function 
 def level_four(color):
     pygame.init()
+    #Creat the Screen
     screen = pygame.display.set_mode([width,hight], pygame.FULLSCREEN, 32)
+     #Random Variables, checking key collection, mouse position, key position, and the floors starting point
     mouse_x = 0
-    key_collected = False
     mouse_y = 0 
+    key_collected = False
     key_x = 2000
     key_y = 350
     floor_x = 0  
-    
-    
+    background_x_change = 0
+    #tells level one what color to make the rabbit based on user choice
     if color == "Blue":
         player_color = Player.blue_bunny
     elif color == "Brown":
@@ -36,14 +36,12 @@ def level_four(color):
         player_color = Player.pink_bunny
     else:
         player_color = Player.black_bunny
-        
-    
-        
+    #Creat Sprites Lists  
     caged_bunny_list = pygame.sprite.Group()
     platform_list = pygame.sprite.Group()
     active_sprite_list = pygame.sprite.Group()
     key_list = pygame.sprite.Group()
-     
+    #Creats Instences of platforms, player,caged bunny and the key 
     platform_test = Platform(0,650,3)
     platform1 = Platform(400,470,3)
     platform2 = Platform(935,300,3)
@@ -53,28 +51,27 @@ def level_four(color):
     player = Player(25,400,platform_list,True,player_color, hight,spike_list=())
     caged_bunny = Caged_Bunny(2870,314,platform_list) 
     key = Key(key_x,key_y,player.change_x)
-    
-    #snake limits
-    
+    #Music
     mute_button = pygame.image.load("Mute_Button.png")
     unmute_button = pygame.image.load("Muted_Button.png")
     sound_button = mute_button
     play_counter = 0
-    
+    pygame.mixer.music.load("BoxCat_Games_-_10_-_Epic_Song.wav")
+    pygame.mixer.music.play()
+    #Add instences to the sprite groups 
     key_list.add(key)
     caged_bunny_list.add(caged_bunny)
     platform_list.add(platform_test,platform2,platform7,platform1,platform3,platform6)
     active_sprite_list.add(caged_bunny, platform7, player,platform_test,platform2,platform1,platform3,platform6,key)
-    
-    background_x_change = 0
-    pygame.mixer.music.load("BoxCat_Games_-_10_-_Epic_Song.wav")
-    pygame.mixer.music.play()
+    #Blitted text
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
     text11 = font2.render("Exit",True,Constants.RED)
+    #death screen 
     game_over_image = pygame.image.load("game over_falling.png")
-    
+    #Clock and are we done
     clock = pygame.time.Clock()
     done = False
+    #background
     background_image = pygame.image.load("Space_Level.png")
     background_x = -20
      
