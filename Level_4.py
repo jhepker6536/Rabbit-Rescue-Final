@@ -51,7 +51,7 @@ def level_four(color):
     platform6 = Platform(2200,630,3)
     platform7 = Platform(2800, 460,3)
     player = Player(25,400,platform_list,True,player_color, hight,spike_list=())
-    caged_bunny = Caged_Bunny(3070,314,platform_list) 
+    caged_bunny = Caged_Bunny(2870,314,platform_list) 
     key = Key(key_x,key_y,player.change_x)
     
     #snake limits
@@ -189,7 +189,8 @@ def level_four(color):
         if Constants.game_over == True:
             screen.blit(game_over_image,[0,0])  
             
-        if  caged_bunny.image_num == 2 and player.rect.y >= 738:
+        if player.rect.x >= 1170:
+            print("hit")
             Constants.level = 5 
             break   
         

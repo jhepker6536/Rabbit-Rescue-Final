@@ -83,14 +83,15 @@ def level_three(color):
     background_y_change = 0 
     font2 = pygame.font.SysFont('Calibri', 30, True, False)
     text11 = font2.render("Exit",True,Constants.RED)
-    
+    arrow = pygame.image.load("Arrow.png")
+    arrow.set_colorkey(Constants.WHITE)
     mute_button = pygame.image.load("Mute_Button.png")
     unmute_button = pygame.image.load("Muted_Button.png")
     sound_button = mute_button
     play_counter = 0
     pygame.mixer.music.load("BoxCat_Games_-_10_-_Epic_Song.wav")
     pygame.mixer.music.play(-1,0.0)
-    
+
     screen_speed_a = 3
     screen_speed_b = 2
     if Constants.difficulty == "easy":
@@ -212,7 +213,8 @@ def level_three(color):
         
           
             
-        
+        if caged_bunny.image_num == 2:
+            screen.blit(arrow,[400,30])
             
         if background_y <= -20:    
             background_y_change = screen_speed_a
@@ -240,7 +242,7 @@ def level_three(color):
         active_sprite_list.draw(screen)  
         if Constants.game_over == True:
             screen.blit(game_over_image,[0,0])   
-        if caged_bunny.image_num == 2 and player2.rect.x == 900:
+        if caged_bunny.image_num == 2 and player2.rect.x >= 900:
             Constants.level = 4 
             break   
         screen.blit(sound_button,[12,700])

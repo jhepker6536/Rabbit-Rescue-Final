@@ -60,6 +60,8 @@ def level_one(color):
     mute_button = pygame.image.load("Mute_Button.png")
     unmute_button = pygame.image.load("Muted_Button.png")
     sound_button = mute_button
+    arrow_buttons = pygame.image.load("Buttons.png")
+    arrow_buttons.set_colorkey(Constants.YELLOW)
     play_counter = 0
     
     key_list.add(key)
@@ -117,7 +119,8 @@ def level_one(color):
             
         screen.fill(Constants.WHITE)
         screen.blit(background_image, [background_x, 0])
-        
+        if player.rect.x <= 300:
+            screen.blit(arrow_buttons,[100,20])
         #quit
         print(bird.rect.x)    
         pos = pygame.mouse.get_pos()
@@ -156,9 +159,7 @@ def level_one(color):
         if player.change_x > 0:
             Platform.platform_move_x += player.change_x + 2
             Caged_Bunny.Cage_move_x += player.change_x + 2
-            
-            
-             
+               
         elif player.change_x < 0:
             Platform.platform_move_x += player.change_x - 2
             Caged_Bunny.Cage_move_x += player.change_x - 2
