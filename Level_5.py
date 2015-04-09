@@ -12,7 +12,7 @@ def level_five(color):
     pygame.init()
     screen = pygame.display.set_mode([width,hight], pygame.FULLSCREEN, 32)
     snake_x = 475
-    snake_y = 8532 
+    snake_y = 8550
     mouse_x = 0
     mouse_y = 0
     floor_x = 0 
@@ -172,6 +172,7 @@ def level_five(color):
         block_hit_list = pygame.sprite.spritecollide(player,snake_list, False)
         for block in block_hit_list:
             snake_king.die()
+            player.change_y = 0 
             
         
         

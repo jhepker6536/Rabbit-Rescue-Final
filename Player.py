@@ -18,10 +18,10 @@ class Snake_king(pygame.sprite.Sprite):
         super().__init__()
  
         sprite_sheet = SpriteSheet("Caged Bunnies.png")
-        image = sprite_sheet.get_image(659, 1395,763, 173)
+        image = sprite_sheet.get_image(643, 1361,781, 173)
         image.set_colorkey(Constants.WHITE)
         self.king.append(image)
-        image = sprite_sheet.get_image(595, 1561, 831, 173)
+        image = sprite_sheet.get_image(601, 1563, 831, 173)
         image.set_colorkey(Constants.WHITE)
         self.king.append(image)
         
