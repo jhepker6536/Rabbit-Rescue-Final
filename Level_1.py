@@ -1,6 +1,6 @@
 #Imports 
 import pygame 
-from Player import Player, Key, Caged_Bunny,Bird
+from Player import Player, Key, Caged_Bunny
 import Constants
 from Platforms import Platform
 #size variables for screen
@@ -131,7 +131,7 @@ def level_one(color):
         background_x += background_x_change
         
         #Put instructional arrows on the screen
-        if player.rect.x <= 300:
+        if player.rect.x <= 200:
             screen.blit(arrow_buttons,[100,20])
         #Mouse 
         pos = pygame.mouse.get_pos()

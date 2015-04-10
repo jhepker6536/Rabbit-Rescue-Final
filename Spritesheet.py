@@ -1,7 +1,7 @@
 import pygame
 import Constants
 class SpriteSheet(object):
-   
+    """this class is used to pull all of the pictures out of the sprite sheets"""
     sprite_sheet = None
  
     def __init__(self, file_name):

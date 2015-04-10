@@ -6,6 +6,8 @@ import random
 #Player Colors
 
 class Snake_king(pygame.sprite.Sprite):
+    """The king snake is used in the final 
+    level as the "boss" to be defeated"""
     king = []
     change_y = 0
     direction = "U"
@@ -38,6 +40,7 @@ class Snake_king(pygame.sprite.Sprite):
     
         
 class Missle(pygame.sprite.Sprite):
+    """the missles are used in level 5 shooting up at the player"""
     missle = []
     missle_move_y = -3
     direction = "U"
@@ -45,15 +48,11 @@ class Missle(pygame.sprite.Sprite):
         
         self.speed = speed
         self.change_y = self.speed 
-        
-        
         super().__init__()
- 
         sprite_sheet = SpriteSheet("Caged Bunnies.png")
         image = sprite_sheet.get_image(870, 879, 78, 413)
         image.set_colorkey(Constants.WHITE)
         self.missle.append(image)
-        
         
         self.image = self.missle[0]
         self.rect = self.image.get_rect()
@@ -69,66 +68,22 @@ class Missle(pygame.sprite.Sprite):
     def reset(self):
         self.rect.x = random.randrange(25,1000)
         self.rect.y = 1000
-class Bird(pygame.sprite.Sprite):
-    bird = []
-    bird_move_x = -3
-    bird_move_y = 0 
-    direction = "R"
-    def __init__(self, x,y):
-        self.x = x
-        self.y = y
-        self.start_x = x
-        self.start_y = y
-        self.change_x = 0
-        self.change_y = 0
-        
-        super().__init__()
- 
-        sprite_sheet = SpriteSheet("Caged Bunnies.png")
-        image = sprite_sheet.get_image(29, 779, 236, 161)
-        image.set_colorkey(Constants.WHITE)
-        self.bird.append(image)
-        image = sprite_sheet.get_image(497, 806, 220, 117)
-        image.set_colorkey(Constants.WHITE)
-        self.bird.append(image)
-        image = sprite_sheet.get_image(269, 810, 207, 113)
-        image.set_colorkey(Constants.WHITE)
-        self.bird.append(image)
-        
-        self.image = self.bird[0]
-        self.rect = self.image.get_rect()
-        self.rect.x = self.x
-        self.rect.y = self.y
-    def update(self):
-        self.rect.x += self.change_x 
-        self.rect.y += self.change_y
-        pos = self.rect.x 
-        
-        if self.direction == "R":
-            frame = (pos // 20) % len(self.bird)
-            self.image = self.bird[frame]
-    def reset(self):
-        self.rect.x = self.start_x
-        self.rect.y = self.start_y
         
 #Spike Class        
 class Spikes(pygame.sprite.Sprite):
+    """Spikes atre used in level two on the ground"""
     spike = []
     spike_move_x = 0
     spike_move_y = 0 
     def __init__(self, x,y):
         self.x = x
         self.y = y
-        
-        
         super().__init__()
  
         sprite_sheet = SpriteSheet("Caged Bunnies.png")
         image = sprite_sheet.get_image(26, 562, 468, 108)
         image.set_colorkey(Constants.WHITE)
         self.spike.append(image)
-        
-        
         self.image = self.spike[0]
         self.rect = self.image.get_rect()
     def update(self):
@@ -138,6 +93,8 @@ class Spikes(pygame.sprite.Sprite):
 
 #snake class   
 class Snake(pygame.sprite.Sprite):
+    """the snakes are used in level three
+     pacing back and fourth on the platforms""" 
     snake_right = []
     snake_left = []
     change_x = 0
@@ -200,6 +157,9 @@ class Snake(pygame.sprite.Sprite):
         
 #Caged bunny class
 class Caged_Bunny(pygame.sprite.Sprite):
+    """the caged bunny is used in every 
+    level at the end of the level, once
+     hit with the key the bunny is released"""
     caged_bunny_list = []
     Cage_move_x = 0 
     Cage_move_y = 0 
@@ -220,9 +180,6 @@ class Caged_Bunny(pygame.sprite.Sprite):
         image = sprite_sheet.get_image(759, 89, 215, 641)
         self.caged_bunny_list.append(image)
         image.set_colorkey(Constants.WHITE)
-        
-        
-        
         self.image = self.caged_bunny_list[self.image_num]
         self.rect = self.image.get_rect()
        
@@ -244,6 +201,8 @@ class Caged_Bunny(pygame.sprite.Sprite):
 
 #Key Class
 class Key(pygame.sprite.Sprite):
+    """the key is in every level minus the 
+    last one the player must collect it to beat the level"""
     key_list = []
     key_move_x = 0 
     key_move_y = 0 
@@ -280,7 +239,9 @@ class Key(pygame.sprite.Sprite):
     
 #main player class        
 class Player(pygame.sprite.Sprite):
- 
+    """This is the main player class that is used 
+    for most of the game and has a wide range of
+     functions, jump ,left, right"""
     change_x = 0
     change_y = 0
 
@@ -348,8 +309,6 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = self.x
 
     def update(self):
-        
-        
         self.rect.y += self.change_y
         self.rect.x += self.change_x
         pos = self.rect.x 
@@ -376,42 +335,27 @@ class Player(pygame.sprite.Sprite):
             if self.change_y >= 1:
                 self.rect.bottom = block.rect.top
             elif self.change_y < 1:
-                self.rect.top = block.rect.bottom
-            
- 
-            # Stop our vertical movement
+                self.rect.top = block.rect.bottom# Stop our vertical movement
             self.change_y = 0
         block_hit_list = pygame.sprite.spritecollide(self, self.spike_list, False)
         for block in block_hit_list:
             
             self.change_x = 0
-           
- 
             # Stop our vertical movement
             self.change_y = 0
-            
             Constants.game_over = True
-        
-
         if self.rect.x <= 5:
-            self.rect.x = 5    
-            
-        
-        
-              
+            self.rect.x = 5 
     def calc_grav(self):    
-        
         if self.rect.y <= 655:
             if self.change_y == 0:
                 self.change_y += 1
             else:
-                self.change_y += .45
-                
+                self.change_y += .45   
             if self.rect.y <= self.height - 96 and self.change_y == 0:
                 self.rect.y = self.height - 95  
         else:
-            None 
-
+            None
     def go_right(self):
         self.change_x = 3
         self.direction = "R"
@@ -422,7 +366,6 @@ class Player(pygame.sprite.Sprite):
         elif self.direction == "L":
             self.image = self.walking_frames_l[0]
  
-     
     def go_left(self):
         self.change_x -= 3
         self.direction = "L"
@@ -439,8 +382,7 @@ class Player(pygame.sprite.Sprite):
         
 #Animated bunnies for the main screen
 class Animated_Player(pygame.sprite.Sprite):
-    
-    
+    """the animated bunnies are for the main title screen of the game"""
     change_x = 0
     change_y = 0
     
@@ -454,11 +396,7 @@ class Animated_Player(pygame.sprite.Sprite):
     purple_bunny =([475,350,98,89],[486,470,110,112],[460,580,132,94])
     bunny_list = (brown_bunny, black_bunny, green_bunny, blue_bunny,purple_bunny)
     direction = "R"
-
-    
     level = None
-
-    
     def __init__(self,bunny_color,width,left): 
         
         self.width = width 
@@ -539,7 +477,9 @@ class Animated_Player(pygame.sprite.Sprite):
         
 #bunnies for the up level
 class Player_climber(pygame.sprite.Sprite):
- 
+    """this player class is a modified main player class 
+    that is used for level 3 when the
+     bunny must climb up the map"""
     change_x = 0
     change_y = 0
     
@@ -555,11 +495,7 @@ class Player_climber(pygame.sprite.Sprite):
     yellow_bunny = ([656,305,104,91],[636,419,113,113],[605,545,134,94])
     pink_bunny = ([234,331,101,91],[235,443,114,107],[232,556,138,103])
     direction = "R"
-
-    
     level = None
-
-    
     def __init__(self,x,y,list_platform,grav,bunny_color,hight,spike_list): 
         self.height = hight
         self.grav = grav
@@ -605,12 +541,9 @@ class Player_climber(pygame.sprite.Sprite):
         self.rect.x = self.x
 
     def update(self):
-        
-        
         self.rect.y += self.change_y
         self.rect.x += self.change_x
         pos = self.rect.x 
-         
         if self.direction == "R" and self.change_y != 1:
             frame = (pos // 20) % len(self.walking_frames_r)
             self.image = self.walking_frames_r[frame]
@@ -628,45 +561,30 @@ class Player_climber(pygame.sprite.Sprite):
             self.change_y = 1
                
         block_hit_list = pygame.sprite.spritecollide(self, self.list, False)
-        for block in block_hit_list:
-            
+        for block in block_hit_list:  
             if self.change_y >= 1:
                 self.rect.bottom = block.rect.top
             elif self.change_y < 0:
                 self.rect.top = block.rect.bottom
             if self.rect.top == block.rect.bottom:
                 self.rect.top = block.rect.bottom
- 
             # Stop our vertical movement
             self.change_y = 0
         block_hit_list = pygame.sprite.spritecollide(self, self.spike_list, False)
-        for block in block_hit_list:
-            
+        for block in block_hit_list:    
             self.change_x = 0
-           
- 
             # Stop our vertical movement
             self.change_y = 0
-            
             Constants.game_over = True
         if self.rect.y == 0:
             self.rect.y = 0
-
         if self.rect.x <= 5:
-            self.rect.x = 5    
-            
-        
-        
-              
+            self.rect.x = 5       
     def calc_grav(self):    
-        
         if self.change_y == 0:
             self.change_y += 1
         else:
             self.change_y += .25
-            
-    
-
     def go_right(self):
         self.change_x = 5
         self.direction = "R"
@@ -676,8 +594,6 @@ class Player_climber(pygame.sprite.Sprite):
             self.image = self.walking_frames_r[0]
         elif self.direction == "L":
             self.image = self.walking_frames_l[0]
- 
-     
     def go_left(self):
         self.change_x -= 5
         self.direction = "L"
@@ -690,7 +606,7 @@ class Player_climber(pygame.sprite.Sprite):
 
 #still bunnies to display information         
 class Not_Moving_Bunny():
-    
+    """bunnys that are used for the color selection in the settings screen""" 
     brown_bunny = ([35,2,95,88],[20,101,110,122],[5,226,137,116])
     black_bunny = ([179,0,102,88],[183,89,111,113],[175,198,137,130])
     green_bunny = ([389,14,99,88],[389,114,115,123],[367,232,139,127])
@@ -709,13 +625,10 @@ class Not_Moving_Bunny():
         self.rabbit_y = self.rabbit[0][1]
         self.rabbit_w = self.rabbit[0][2]
         self.rabbit_l = self.rabbit[0][3]
-        
-        
         sprite_sheet = SpriteSheet("Rabbit_Sprite.png")
         image = sprite_sheet.get_image(self.rabbit_x,self.rabbit_y,self.rabbit_w,self.rabbit_l)
         self.rabbit_list.append(image)
         image.set_colorkey(Constants.YELLOW)
-        
         
         self.image = self.rabbit_list[0]
         self.rect = self.image.get_rect()        
@@ -725,10 +638,8 @@ class Not_Moving_Bunny():
         self.rect.x = self.x
 #Bunnies for the down level   
 
-
-
 class Player_Falling(pygame.sprite.Sprite):
- 
+    """This is a modified player class used for the last level where the player is falling with a paracute"""
     change_x = 0
     change_y = 0
     direction = "S"
@@ -744,12 +655,7 @@ class Player_Falling(pygame.sprite.Sprite):
     white_bunny = ([1510,489,171,221],[1680,488,172,223],[1851,488,167,216])
     yellow_bunny = ([1510,1609,172,215],[1679,1608,168,220],[1850,1599,170,222])
     pink_bunny = ([1509,939,169,225],[1680,941,166,220],[1850,940,168,218])
-    
-
-    
     level = None
-
-    
     def __init__(self,x,y,list_platform,grav,bunny_color,hight,spike_list): 
         self.height = hight
         self.grav = grav
@@ -771,9 +677,7 @@ class Player_Falling(pygame.sprite.Sprite):
         image = sprite_sheet.get_image(bunny_color[2][0],bunny_color[2][1],bunny_color[2][2],bunny_color[2][3])
         self.walking_frames_r.append(image)
         image.set_colorkey(Constants.WHITE)
-        
-        
-        
+         
         self.image = self.walking_frames_r[0]
         self.rect = self.image.get_rect()        
         image.set_colorkey(Constants.WHITE)
@@ -785,7 +689,6 @@ class Player_Falling(pygame.sprite.Sprite):
         self.rect.y += self.change_y
         self.rect.x += self.change_x
         pos = self.rect.x 
-         
         if self.direction == "R" and self.change_y != 1:
             frame = (pos // 20) % len(self.walking_frames_r)
             self.image = self.walking_frames_r[frame]
@@ -795,42 +698,25 @@ class Player_Falling(pygame.sprite.Sprite):
         elif self.direction == "L" and self.change_y != 1:
             frame = (pos // 20) % len(self.walking_frames_l)
             self.image = self.walking_frames_l[frame]
-        
-        
                
         block_hit_list = pygame.sprite.spritecollide(self, self.list, False)
-        for block in block_hit_list:
-            
+        for block in block_hit_list: 
             if self.change_y >= 1:
                 self.rect.bottom = block.rect.top
             elif self.change_y < 1:
                 self.rect.top = block.rect.bottom
-            
             # Stop our vertical movement
-            self.change_y = 0
-            
+            self.change_y = 0   
         block_hit_list = pygame.sprite.spritecollide(self, self.spike_list, False)
         for block in block_hit_list:
             self.change_x = 0
             # Stop our vertical movement
-            self.change_y = 0
-            
+            self.change_y = 0 
             Constants.game_over = True
-        
-
         if self.rect.x <= 5:
-            self.rect.x = 5    
-            
-        
-        
-              
+            self.rect.x = 5         
     def calc_grav(self):    
-        
-        
         self.change_y += .002
-                
-         
-
     def go_right(self):
         self.change_x = 7
         self.direction = "R"
@@ -840,12 +726,9 @@ class Player_Falling(pygame.sprite.Sprite):
             self.image = self.walking_frames_s[0]
         elif self.direction == "L":
             self.image = self.walking_frames_s[0]
- 
-     
     def go_left(self):
         self.change_x -= 7
         self.direction = "L"
-    
     def reset(self):
         self.rect.x = self.start_x
         self.rect.y = self.start_y

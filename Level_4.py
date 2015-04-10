@@ -75,19 +75,25 @@ def level_four(color):
     background_image = pygame.image.load("Space_Level.png")
     background_x = -20
      
-    
+    #main while loop
     while not done:
         for event in pygame.event.get():
+            #Check if the user hits any buttons
             if event.type == pygame.KEYDOWN:
+                #move left
                 if event.key == pygame.K_LEFT:
                     player.go_left()
                     background_x_change += 2
+                    #move right
                 elif event.key == pygame.K_RIGHT:
                     player.go_right()
                     background_x_change -= 2 
+                #jump
                 elif event.key == pygame.K_SPACE:
                     player.jump()
+            #Check if the user lef go of the button 
             elif event.type == pygame.KEYUP:
+                #stop 
                 if event.key == pygame.K_LEFT and player.change_x < 0:
                     player.stop()
                     background_x_change = 0 
@@ -97,9 +103,11 @@ def level_four(color):
                 elif event.type == pygame.QUIT:
                     done = True 
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                #Does the user hit the end button 
                 if mouse_x >= 1199 and mouse_x <= 1249 and mouse_y >= 710 and mouse_y <= 778:
                     done = True
                     raise SystemExit
+                #Does the user hit the mute button 
                 elif mouse_x >= 12 and mouse_x <= 97 and mouse_y >= 675 and mouse_y <= 775:
                         play_counter += 1 
                         if play_counter % 2 != 0:
@@ -108,6 +116,7 @@ def level_four(color):
                         else:
                             pygame.mixer.music.play()
                             sound_button = mute_button
+                #does the user die and hit play again 
                 elif mouse_x >= 598 and mouse_x <= 1100 and mouse_y >= 400 and mouse_y <= 460:
                     print("hit")
                     Constants.game_over = False
@@ -119,73 +128,62 @@ def level_four(color):
                         
             
                                     
-            
+        #Creat Moving background    
         screen.fill(Constants.WHITE)
         screen.blit(background_image, [background_x, 0])
-        
-        #quit
-        print(play_counter)    
-        pos = pygame.mouse.get_pos()
         if background_x > 0:
             background_x = -7
-        if floor_x > 0:
-            floor_x = -7
-        if player.rect.y <= 0:
-            player.rect.y = 0 
+        background_x += background_x_change 
+        #Mouse    
+        pos = pygame.mouse.get_pos()
         mouse_x = pos[0]
         mouse_y = pos[1]
-        
-        caged_bunny_list.draw(screen)
+        #Keep the floor covered 
+        if floor_x > 0:
+            floor_x = -7
+        #keep the player on the level 
+        if player.rect.y <= 0:
+            player.rect.y = 0
+        #Does the player hit the key 
         block_hit_list = pygame.sprite.spritecollide(player, key_list, False)
         for block in block_hit_list:
             key.move_key()
             key_collected = True
-            
-          
-          
+        #Does the player hit the cage
         block_hit_list = pygame.sprite.spritecollide(player, caged_bunny_list, False)
         for block in block_hit_list:
             pass
             if key_collected == True:
                 caged_bunny.free()
-                
             if key_collected == False:
-                caged_bunny.get_the_key()
-            
-        
-            
-        
+                caged_bunny.get_the_key()   
+        #Move the sprites with the player    
         if key_collected == False and player.change_x > 0:
             Key.key_move_x += player.change_x + 2
         elif key_collected == False and player.change_x < 0:
-            Key.key_move_x += player.change_x - 2    
-            
+            Key.key_move_x += player.change_x - 2       
         if player.change_x > 0:
             Platform.platform_move_x += player.change_x + 2
-            Caged_Bunny.Cage_move_x += player.change_x + 2
-            
-            
-             
+            Caged_Bunny.Cage_move_x += player.change_x + 2     
         elif player.change_x < 0:
             Platform.platform_move_x += player.change_x - 2
             Caged_Bunny.Cage_move_x += player.change_x - 2
-            
-        background_x += background_x_change 
-        
+        #keep the player on the platform 
         if player.rect.x == width:
             Platform.platform_move_x += 3
+        #Draw spritesd to the screen     
         active_sprite_list.update()
-        active_sprite_list.draw(screen) 
+        active_sprite_list.draw(screen)
+        caged_bunny_list.draw(screen)
+        #Blit text 
         screen.blit(sound_button,[12,700])
         screen.blit(text11, [1200,710])
-        
+        #if they fall game over screen 
         if key_collected == False and player.rect.y >= 738:
-            Constants.game_over = True
-            
-        
+            Constants.game_over = True   
         if Constants.game_over == True:
             screen.blit(game_over_image,[0,0])  
-            
+        #The player reached the end of the level     
         if player.rect.x >= 1170:
             print("hit")
             Constants.level = 5 

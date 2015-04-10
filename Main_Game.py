@@ -91,7 +91,6 @@ def Rabbit_Rescue():
     # Parent while loop
     while not really_done:
         Constants.difficulty = difficulty
-        print(Constants.game_over)
         # child loop containing loading screen!
         while screen_view == 0 and done == False:
             for event in pygame.event.get(): 
@@ -128,8 +127,7 @@ def Rabbit_Rescue():
                     really_done = True
                 # Do they hit the bottons and change mouse anamation
                 elif event.type == pygame.MOUSEBUTTONDOWN:                   
-                    if mouse_x >= 399 and mouse_x <= 917 and mouse_y >= 325 and mouse_y <= 416:
-                        print("game")
+                    if mouse_x >= 399 and mouse_x <= 917 and mouse_y >= 325 and mouse_y <= 416: 
                         #WHILE LOOPS THAT CREAT THE LEVELS 
                         #LEVEL ONE
                         while (Constants.level == 1) and Constants.game_over == False:

@@ -1,6 +1,8 @@
 import pygame
 from Spritesheet import SpriteSheet
 class Platform(pygame.sprite.Sprite):
+    """this class is used to create all of 
+    the instences of platforms in the entire game"""
     platform = []
     platform_move_x = 0
     platform_move_y = 0 
